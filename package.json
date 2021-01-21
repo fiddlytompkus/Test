@@ -4,7 +4,8 @@
   "description": "This is our WAD Project (An Instagram Clone)",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Yashx2,Priyanshu",
   "license": "ISC"
