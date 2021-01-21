@@ -1,0 +1,11 @@
+{
+  "name": "wad-project",
+  "version": "1.0.0",
+  "description": "This is our WAD Project (An Instagram Clone)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yashx2,Priyanshu",
+  "license": "ISC"
+}
