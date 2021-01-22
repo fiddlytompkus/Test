@@ -17,4 +17,5 @@ exports.CreateUser = function (req, res) {
       console.log(newUser);
     }
   });
+  res.send('Added User!!!');
 };
