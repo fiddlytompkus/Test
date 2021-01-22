@@ -15,7 +15,6 @@ exports.CreateUser = function (req, res) {
       console.log(err);
     } else {
       console.log(newUser);
-      res.send("Added data to database")
     }
   });
   res.send('Added User!!!');
