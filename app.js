@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const userRouter = require('./routes/userRoutes');
 
 const DB = process.env.DATABASE.replace('<password>', process.env.PASSWORD);
 mongoose
