@@ -3,6 +3,8 @@ const UserController = require('./../Controller/userController');
 
 const router = express.Router('/v1/users');
 
+router.route('/login').post(UserController.login);
+
 router
   .route('/')
   .get(UserController.GetAllUser)
