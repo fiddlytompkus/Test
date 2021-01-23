@@ -1,4 +1,12 @@
 const User = require('../models/userModel');
+const jwt = require('jsonwebtoken');
+const validator = require('validator');
+
+const SignToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+};
 
 exports.GetAllUser = async (req, res) => {
   try {
@@ -27,16 +35,67 @@ exports.CreateUser = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
     };
-    await User.create(newUser);
+    const NewUser = await User.create(newUser);
+    const token = SignToken(NewUser._id);
     res.status(200).json({
       status: 'OK',
-      data: { newUser },
+      data: {
+        User: newUser,
+        token: token,
+      },
     });
   } catch (err) {
     res.status(402).json({
       status: 'Fail',
       message: err,
     });
+  }
+};
+
+exports.login = async (req, res) => {
+  const DReq = { ...req.body };
+  const EmailORUsername = DReq.username;
+  const password = DReq.password;
+  //  console.log(EmailORUsername, '  ', password);
+
+  //1). check password and email
+  if (!password || !EmailORUsername) {
+    return res.status(500).json({
+      status: 'fail',
+      message: 'Username or password required',
+    });
+  }
+  if (validator.isEmail(EmailORUsername)) {
+    const user = await User.findOne({ email: EmailORUsername }).select(
+      '+password'
+    );
+
+    if (user && (await user.CheckPass(password, user.password))) {
+      res.status(200).json({
+        status: 'OK',
+        token: SignToken(user._id),
+      });
+    } else {
+      res.status(401).json({
+        status: 'fail',
+        message: 'userFrom email: Password or email wrong',
+      });
+    }
+  } else {
+    const user = await User.findOne({ username: EmailORUsername }).select(
+      '+password'
+    );
+    if (user && (await user.CheckPass(password, user.password))) {
+      res.status(200).json({
+        status: 'OK',
+        token: SignToken(user._id),
+      });
+    } else {
+      res.status(401).json({
+        status: 'fail',
+        message: 'From username: Password or email wrong',
+      });
+    }
   }
 };
 
@@ -49,7 +108,7 @@ exports.GetUser = async (req, res) => {
         IdUser,
       },
     });
-  } catch {
+  } catch (err) {
     res.status(404).json({
       status: 'Fail',
       message: err,
