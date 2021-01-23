@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 dotenv.config({ path: `${__dirname}/config.env` });
 const app = require(`${__dirname}/app.js`);
 
+app.set("view engine","ejs");
+
 const DB = process.env.DATABASE.replace('<password>', process.env.PASSWORD);
 mongoose
   .connect(DB, {
