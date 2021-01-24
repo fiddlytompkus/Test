@@ -2,67 +2,54 @@ const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const util = require('util'); //for promisfy function
+const catchAsync = require('./../utils/catchAsync');
+const AppError = require('./../utils/appError');
 const SignToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
 
-exports.GetAllUser = async (req, res) => {
-  try {
-    const AllUser = await User.find();
-    res.status(200).json({
-      status: 'OK',
-      data: { AllUser },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+exports.GetAllUser = catchAsync(async (req, res, next) => {
+  const AllUser = await User.find();
+  res.status(200).json({
+    status: 'OK',
+    data: {
+      AllUser,
+    },
+  });
+});
 
-exports.CreateUser = async (req, res) => {
-  try {
-    const newUser = {
-      username: req.body.username,
-      email: req.body.email,
-      phoneNumber: req.body.phoneNumber,
-      DOB: req.body.DOB,
-      password: req.body.password,
-      passwordConfirm: req.body.passwordConfirm,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-    };
-    const NewUser = await User.create(newUser);
-    const token = SignToken(NewUser._id);
-    res.status(200).json({
-      status: 'OK',
-      data: {
-        User: newUser,
-        token: token,
-      },
-    });
-  } catch (err) {
-    res.status(402).json({
-      status: 'Fail',
-      message: err,
-    });
-  }
-};
+exports.CreateUser = catchAsync(async (req, res, next) => {
+  const newUser = {
+    username: req.body.username,
+    email: req.body.email,
+    phoneNumber: req.body.phoneNumber,
+    DOB: req.body.DOB,
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+  };
+  const NewUser = await User.create(newUser);
+  const token = SignToken(NewUser._id);
+  res.status(200).json({
+    status: 'OK',
+    data: {
+      User: newUser,
+      token: token,
+    },
+  });
+});
 
-exports.login = async (req, res) => {
+exports.login = catchAsync(async (req, res, next) => {
   const DReq = { ...req.body };
   const EmailORUsername = DReq.username;
   const password = DReq.password;
 
   // check password and email
   if (!password || !EmailORUsername) {
-    return res.status(500).json({
-      status: 'fail',
-      message: 'Username or password required',
-    });
+    return next(new AppError('Username or password required', 500));
   }
   if (validator.isEmail(EmailORUsername)) {
     const user = await User.findOne({ email: EmailORUsername }).select(
@@ -75,10 +62,7 @@ exports.login = async (req, res) => {
         token: SignToken(user._id),
       });
     } else {
-      res.status(401).json({
-        status: 'fail',
-        message: 'userFrom email: Password or email wrong',
-      });
+      return next(new AppError('email and Password is not correct', 401));
     }
   } else {
     const user = await User.findOne({ username: EmailORUsername }).select(
@@ -90,65 +74,51 @@ exports.login = async (req, res) => {
         token: SignToken(user._id),
       });
     } else {
-      res.status(401).json({
-        status: 'fail',
-        message: 'From username: Password or email wrong',
-      });
+      return next(new AppError('username and Password is not correct', 401));
     }
   }
-};
+});
 
-exports.GetUser = async (req, res) => {
-  try {
-    const IdUser = await User.findById(req.params.id);
-    res.status(200).json({
-      status: 'OK',
-      data: {
-        IdUser,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'Fail',
-      message: err,
-    });
-  }
-};
+exports.GetUser = catchAsync(async (req, res, next) => {
+  const IdUser = await User.findById(req.params.id);
 
-exports.UpdateUser = async (req, res) => {
-  try {
-    const IdUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    res.status(200).json({
-      status: 'OK',
-      data: {
-        IdUser,
-      },
-    });
-  } catch {
-    res.status(404).json({
-      status: 'Fail',
-      message: err,
-    });
+  if (!IdUser) {
+    return next(new AppError('No Tour found with that ID', 404));
   }
-};
 
-exports.DeleteUser = async (req, res) => {
-  try {
-    const IdUser = await User.findByIdAndDelete(req.params.id);
-    res.status(200).json({
-      status: 'OK',
-      data: null,
-    });
-  } catch {
-    res.status(404).json({
-      status: 'Fail',
-      message: err,
-    });
+  res.status(200).json({
+    status: 'OK',
+    data: {
+      IdUser,
+    },
+  });
+});
+
+exports.UpdateUser = catchAsync(async (req, res, next) => {
+  const IdUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!IdUser) {
+    return next(new AppError('No Tour found with that ID', 404));
   }
-};
+
+  res.status(200).json({
+    status: 'OK',
+    data: {
+      IdUser,
+    },
+  });
+});
+
+exports.DeleteUser = catchAsync(async (req, res, next) => {
+  const IdUser = await User.findByIdAndDelete(req.params.id);
+
+  if (!IdUser) {
+    return next(new AppError('No Tour found with that ID', 404));
+  }
+});
 
 //protecting user not to access non-authorized data if he/she is not logged in
 exports.protectAccess = async (req, res, next) => {

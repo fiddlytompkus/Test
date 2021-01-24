@@ -3,12 +3,19 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const { static } = require('express');
 
+process.on('uncaughtException', (err) => {
+  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+  console.log(err.name, err.message);
+  process.exit(1);
+});
+
 dotenv.config({ path: `${__dirname}/config.env` });
 const app = require(`${__dirname}/app.js`);
 
 app.set('view engine', 'ejs');
 
 const DB = process.env.DATABASE.replace('<password>', process.env.PASSWORD);
+
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
@@ -16,14 +23,17 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: true,
   })
-  .then(() => {
-    console.log('Database Successfully Connected');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+  .then(() => console.log('Database Successfully Connected'));
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
+});
+
+process.on('unhandledRejection', (err) => {
+  console.log('UNHANDELED REJECTION! 💥 Shutting down...');
+  console.log(err.name, err.message);
+  server.close(() => {
+    process.exit(1);
+  });
 });
