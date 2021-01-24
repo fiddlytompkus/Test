@@ -4,6 +4,7 @@ const validator = require('validator');
 const util = require('util'); //for promisfy function
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+
 const SignToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -12,41 +13,58 @@ const SignToken = (id) => {
 
 exports.GetAllUser = catchAsync(async (req, res, next) => {
   const AllUser = await User.find();
-  res.status(200).json({
-    status: 'OK',
-    data: {
-      AllUser,
-    },
-  });
+  // res.status(200).json({
+  //   status: 'OK',
+  //   data: {
+  //     AllUser,
+  //   },
+  // });
+  res.status(200).render('users.ejs', { users: AllUser });
 });
 
 exports.CreateUser = catchAsync(async (req, res, next) => {
-  const newUser = {
+  console.log(req.body);
+  // var newUser = {
+  //   firstname: req.body.firstname,
+  //   lastname: req.body.lastname,
+  //   username: req.body.username,
+  //   email: req.body.email,
+  //   phoneNumber: req.body.phoneNumber,
+  //   DOB: req.body.DOB,
+  //   password: req.body.password,
+  //   passwordConfirm: req.body.passwordConfirm,
+  // };
+  // console.log(newUser);
+  const newUser = await User.create({
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     username: req.body.username,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
     DOB: req.body.DOB,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-  };
-  const NewUser = await User.create(newUser);
-  const token = SignToken(NewUser._id);
-  res.status(200).json({
-    status: 'OK',
-    data: {
-      User: newUser,
-      token: token,
-    },
   });
+  console.log(newUser);
+  const token = SignToken(newUser._id);
+  // res.status(200).json({
+  //   status: 'OK',
+  //   data: {
+  //     User: newUser,
+  //     token: token,
+  //   },
+  // });
+  // const AllUser = await User.find();
+  // res.status(200).render("users.ejs",{users:AllUser});
+  res.status(200).redirect('/v1/users');
 });
 
 exports.login = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   const DReq = { ...req.body };
   const EmailORUsername = DReq.username;
   const password = DReq.password;
-
+  console.log(DReq);
   // check password and email
   if (!password || !EmailORUsername) {
     return next(new AppError('Username or password required', 500));
@@ -57,10 +75,11 @@ exports.login = catchAsync(async (req, res, next) => {
     );
 
     if (user && (await user.CheckPass(password, user.password))) {
-      res.status(200).json({
-        status: 'OK',
-        token: SignToken(user._id),
-      });
+      // res.status(200).json({
+      //   status: 'OK',
+      //   token: SignToken(user._id),
+      // });
+      res.status(200).render('posts.ejs');
     } else {
       return next(new AppError('email and Password is not correct', 401));
     }
@@ -69,10 +88,11 @@ exports.login = catchAsync(async (req, res, next) => {
       '+password'
     );
     if (user && (await user.CheckPass(password, user.password))) {
-      res.status(200).json({
-        status: 'OK',
-        token: SignToken(user._id),
-      });
+      // res.status(200).json({
+      //   status: 'OK',
+      //   token: SignToken(user._id),
+      // });
+      res.status(200).render('posts.ejs');
     } else {
       return next(new AppError('username and Password is not correct', 401));
     }

@@ -1,7 +1,13 @@
 const express = require('express');
 const UserController = require('./../Controller/userController');
 
-const router = express.Router('/v1/users');
+const router = express.Router();
+
+router
+  .route('/')
+  .get(UserController.protectAccess, UserController.GetAllUser)
+  // .get(UserController.GetAllUser)
+  .post(UserController.CreateUser);
 
 router
   .route('/login')
@@ -10,14 +16,14 @@ router
     res.render('login.ejs');
   });
 
-router
-  .route('/')
-  .get(UserController.protectAccess, UserController.GetAllUser)
-  .post(UserController.CreateUser);
+router.route('/register').get((req, res) => {
+  res.render('register.ejs');
+});
 
 router
   .route('/:id')
   .get(UserController.GetUser)
   .patch(UserController.UpdateUser)
   .delete(UserController.DeleteUser);
+
 module.exports = router;
