@@ -15,9 +15,14 @@ router
   .get(UserController.GetAllUser)
   .post(UserController.CreateUser);
 
+router.route('/register').get((req, res) => {
+  res.render('register.ejs');
+});
+
 router
   .route('/:id')
   .get(UserController.GetUser)
   .patch(UserController.UpdateUser)
   .delete(UserController.DeleteUser);
+
 module.exports = router;

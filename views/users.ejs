@@ -1,0 +1,15 @@
+<%- include('partials/header.ejs') %>
+    <div class="container">
+        <% users.forEach(function(user){ %>
+            <div class="container" style="border: 1px solid;">
+                <p><%= user.username %></p>
+                <p><%= user.email %></p>
+                <p><%= user.password %></p>
+                <p><%= user.firstname %></p>
+                <p><%= user.lastname %></p>
+                <p><%= user.phoneNumber %></p>
+                <p><%= user.DOB %></p>
+            </div>
+        <% }) %>
+    </div>
+<%- include('partials/footer.ejs') %>

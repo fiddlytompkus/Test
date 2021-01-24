@@ -31,12 +31,12 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords are not the same!',
     },
   },
-  firstName: {
+  firstname: {
     type: String,
     required: [true, 'Please provide your first name'],
     maxlength: 20,
   },
-  lastName: {
+  lastname: {
     type: String,
     required: [true, 'Please provide your last name'],
     maxlength: 20,

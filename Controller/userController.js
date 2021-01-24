@@ -12,34 +12,41 @@ const SignToken = (id) => {
 
 exports.GetAllUser = catchAsync(async (req, res, next) => {
   const AllUser = await User.find();
-  res.status(200).json({
-    status: 'OK',
-    data: {
-      AllUser,
-    },
-  });
+  // res.status(200).json({
+  //   status: 'OK',
+  //   data: {
+  //     AllUser,
+  //   },
+  // });
+  res.status(200).render("users.ejs",{users:AllUser});
 });
 
 exports.CreateUser = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   const newUser = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     username: req.body.username,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
     DOB: req.body.DOB,
     password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    passwordConfirm: req.body.passwordConfirm, 
   };
-  const NewUser = await User.create(newUser);
-  const token = SignToken(NewUser._id);
-  res.status(200).json({
-    status: 'OK',
-    data: {
-      User: newUser,
-      token: token,
-    },
-  });
+  console.log(newUser);
+  const nUser = await User.create(newUser);
+  console.log(nUser);
+  const token = SignToken(nUser._id);
+  // res.status(200).json({
+  //   status: 'OK',
+  //   data: {
+  //     User: newUser,
+  //     token: token,
+  //   },
+  // });
+  // const AllUser = await User.find();
+  // res.status(200).render("users.ejs",{users:AllUser});
+  res.status(200).redirect("/v1/users");
 });
 
 exports.login = catchAsync(async (req, res, next) => {
