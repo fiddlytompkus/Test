@@ -19,7 +19,7 @@ exports.GetAllUser = catchAsync(async (req, res, next) => {
   //     AllUser,
   //   },
   // });
-  res.status(200).render("users.ejs",{users:AllUser});
+  res.status(200).render('users.ejs', { users: AllUser });
 });
 
 exports.CreateUser = catchAsync(async (req, res, next) => {
@@ -32,7 +32,7 @@ exports.CreateUser = catchAsync(async (req, res, next) => {
   //   phoneNumber: req.body.phoneNumber,
   //   DOB: req.body.DOB,
   //   password: req.body.password,
-  //   passwordConfirm: req.body.passwordConfirm, 
+  //   passwordConfirm: req.body.passwordConfirm,
   // };
   // console.log(newUser);
   const newUser = await User.create({
@@ -43,7 +43,7 @@ exports.CreateUser = catchAsync(async (req, res, next) => {
     phoneNumber: req.body.phoneNumber,
     DOB: req.body.DOB,
     password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm, 
+    passwordConfirm: req.body.passwordConfirm,
   });
   console.log(newUser);
   const token = SignToken(newUser._id);
@@ -56,7 +56,7 @@ exports.CreateUser = catchAsync(async (req, res, next) => {
   // });
   // const AllUser = await User.find();
   // res.status(200).render("users.ejs",{users:AllUser});
-  res.status(200).redirect("/v1/users");
+  res.status(200).redirect('/v1/users');
 });
 
 exports.login = catchAsync(async (req, res, next) => {
