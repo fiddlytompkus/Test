@@ -12,7 +12,7 @@ router
 
 router
   .route('/')
-  .get(UserController.GetAllUser)
+  .get(UserController.protectAccess, UserController.GetAllUser)
   .post(UserController.CreateUser);
 
 router.route('/register').get((req, res) => {

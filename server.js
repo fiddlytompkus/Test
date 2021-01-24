@@ -1,6 +1,7 @@
 const http = require('http');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const { static } = require('express');
 
 process.on('uncaughtException', (err) => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');

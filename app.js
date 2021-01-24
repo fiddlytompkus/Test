@@ -8,7 +8,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(express.static(`${__dirname}/public`));
 app.use('/v1/users/', userRouter);
 
 app.all('*', (req, res, next) => {
