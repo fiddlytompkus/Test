@@ -6,7 +6,7 @@ const globalErrorHandler = require('./Controller/errorController');
 const app = express();
 
 app.use(express.json());
-
+app.use(express.static(`${__dirname}/public`));
 app.use('/v1/users/', userRouter);
 
 app.all('*', (req, res, next) => {

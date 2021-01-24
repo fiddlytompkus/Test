@@ -49,6 +49,7 @@ const userSchema = new mongoose.Schema({
   DOB: {
     type: String,
   },
+  passwordChangedAt: Date,
 });
 
 userSchema.pre('save', async function (next) {
@@ -64,6 +65,14 @@ userSchema.methods.CheckPass = async function (
   userPassword
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+userSchema.methods.PasswordChanged = function (ExpiresAt) {
+  if (this.passwordChangedAt) {
+    const ChangeAtInms = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+    return ExpiresAt < ChangeAtInms;
+  }
+  return false;
 };
 
 const User = mongoose.model('User', userSchema);
