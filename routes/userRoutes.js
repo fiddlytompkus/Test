@@ -6,7 +6,6 @@ const router = express.Router();
 router
   .route('/')
   .get(UserController.protectAccess, UserController.GetAllUser)
-  // .get(UserController.GetAllUser)
   .post(UserController.CreateUser);
 
 router
