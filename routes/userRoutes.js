@@ -3,21 +3,15 @@ const UserController = require('./../Controller/userController');
 
 const router = express.Router();
 
+////
 router
   .route('/')
   .get(UserController.protectAccess, UserController.GetAllUser)
   .post(UserController.CreateUser);
 
-router
-  .route('/login')
-  .post(UserController.login)
-  .get((req, res) => {
-    res.render('login.ejs');
-  });
-
-router.route('/register').get((req, res) => {
-  res.render('register.ejs');
-});
+router.route('/login').post(UserController.login);
+router.route('/forgotPassword').post(UserController.forgotPassword);
+router.route('/resetPassword/:resetToken').patch(UserController.resetPassword);
 
 router
   .route('/:id')
