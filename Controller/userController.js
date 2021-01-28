@@ -3,6 +3,16 @@ const validator = require('validator');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach((el) => {
+    if (allowedFields.includes(el)) {
+      newObj[el] = obj[el];
+    }
+  });
+  return newObj;
+};
+
 exports.GetAllUser = catchAsync(async (req, res, next) => {
   const AllUser = await User.find();
   res.status(200).json({
@@ -13,6 +23,43 @@ exports.GetAllUser = catchAsync(async (req, res, next) => {
     },
   });
   //res.status(200).render('users.ejs', { users: AllUser });
+});
+
+exports.updateMe = catchAsync(async (req, res, next) => {
+  // 1) Create an Error If User tries to update Password (Post Password Data)
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(
+      new AppError(
+        'This route is not for password Updates. Please Use /updateMyPassword',
+        400
+      )
+    );
+  }
+
+  // Filtered Out unwanted fields name that are not allowed to be updated
+  const filteredBody = filterObj(
+    req.body,
+    'username',
+    'email',
+    'DOB',
+    'photo',
+    'firstname',
+    'lastname',
+    'phoneNumber'
+  );
+
+  // 2) Update User Document
+  const updatedUser = await User.findByIdAndUpdate(req.user._id, filteredBody, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: updatedUser,
+    },
+  });
 });
 
 exports.CreateUser = (req, res) => {
