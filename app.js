@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 //routes
-// app.use('/', viewRouter);
+app.use('/', viewRouter);
 app.use('/v1/users/', userRouter);
 
 app.all('*', (req, res, next) => {

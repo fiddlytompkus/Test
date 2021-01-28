@@ -36,16 +36,11 @@ exports.signup = catchAsync(async (req, res, next) => {
     DOB: req.body.DOB,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
-    role: req.body.role,
+    //role: req.body.role,
   });
   //   console.log(newUser);
   // Signup Token used for Login Purpose
   createSendToken(newUser, 201, res);
-
-  // Rendering
-  const AllUser = await User.find();
-  //   res.status(200).render('users.ejs', { users: AllUser });
-  //   res.status(200).redirect('/v1/users');
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -167,6 +162,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
       message,
     });
 
+    // res.redirect(200, '/login');
     res.status(200).json({
       status: 'success',
       message: 'Token sent to email!',
