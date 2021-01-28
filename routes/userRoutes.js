@@ -1,22 +1,34 @@
+// authController protection is to be set in the post model but for checking purposes it has been set over here
+
 const express = require('express');
 const UserController = require('./../Controller/userController');
+const authController = require('./../Controller/authController');
 
 const router = express.Router();
 
-////
+router.post('/signup', authController.signup);
+router.post('/login', authController.login);
+router.post('/forgotPassword', authController.forgotPassword);
+router.patch('/resetPassword/:token', authController.resetPassword);
+router.patch(
+  '/updateMyPassword',
+  authController.protectAccess,
+  authController.updatePassword
+);
+
 router
   .route('/')
-  .get(UserController.protectAccess, UserController.GetAllUser)
+  .get(authController.protectAccess, UserController.GetAllUser)
   .post(UserController.CreateUser);
-
-router.route('/login').post(UserController.login);
-router.route('/forgotPassword').post(UserController.forgotPassword);
-router.route('/resetPassword/:resetToken').patch(UserController.resetPassword);
 
 router
   .route('/:id')
   .get(UserController.GetUser)
   .patch(UserController.UpdateUser)
-  .delete(UserController.DeleteUser);
+  .delete(
+    authController.protectAccess,
+    authController.restrictTo('admin'),
+    UserController.DeleteUser
+  );
 
 module.exports = router;
