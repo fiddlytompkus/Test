@@ -44,8 +44,8 @@ exports.signup = catchAsync(async (req, res, next) => {
 
   // Rendering
   const AllUser = await User.find();
-  res.status(200).render('users.ejs', { users: AllUser });
-  //res.status(200).redirect('/v1/users');
+  //   res.status(200).render('users.ejs', { users: AllUser });
+  //   res.status(200).redirect('/v1/users');
 });
 
 exports.login = catchAsync(async (req, res, next) => {

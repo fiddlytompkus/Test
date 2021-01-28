@@ -20,6 +20,11 @@ router.patch(
   authController.protectAccess,
   UserController.updateMe
 );
+router.delete(
+  '/deleteMe',
+  authController.protectAccess,
+  UserController.deleteMe
+);
 
 router
   .route('/')
