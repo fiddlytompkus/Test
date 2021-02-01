@@ -1,5 +1,18 @@
+.testbg {
+  background-color: teal;
+}
 .nav-con {
   padding: 10px 20px 10px 20px;
+}
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+}
+@media screen and (max-width: 1200px) {
+  .left-block {
+    display: none;
+  }
 }
 @media screen and (min-width: 1200px) {
   .left-block {
@@ -8,6 +21,14 @@
     margin-left: -50px;
     background-color: orchid;
     float: left;
+    padding: 10px;
+    display: block;
+    position: sticky;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .right-block {
+    display: none;
   }
 }
 @media screen and (min-width: 1200px) {
@@ -16,10 +37,33 @@
     width: 265px;
     margin-right: -50px;
     float: right;
+    display: block;
     position: relative;
     position: sticky;
+    padding: 10px;
     position: -webkit-sticky;
     background-color: orchid;
+    position: sticky;
+  }
+  .friend-list {
+    max-height: 100vh;
+    overflow: scroll;
+  }
+  .friend-list-item {
+    height: 70px;
+  }
+  .friend-list-search {
+    margin: 10px;
+  }
+  .add-friend-option {
+    display: block;
+    margin-left: 75px;
+    margin-top: -20px;
+  }
+  .friend-status {
+    display: block;
+    margin-left: 75px;
+    margin-top: -20px;
   }
 }
 .avatar {
@@ -64,8 +108,9 @@
 }
 .post-input {
   /* FIXME */
-  max-width: 512px;
-  margin-top: 14px;
+  /* max-width: 512px; */
+  width: 80%;
+  margin-top: 15px;
   margin-left: 0px;
   height: 50px;
   border-radius: 10px;
@@ -87,6 +132,7 @@
   margin: 125px auto;
   background-color: orange;
   height: auto;
+  /* height: 20000px; */
   padding-left: 32px;
   padding-right: 8px;
   padding-bottom: 50px;
@@ -116,7 +162,8 @@
   height: 230px;
   border-radius: 5px;
   /* max-width: 576px; */
-  width: 576px;
+  /* width: 576px; */
+  width: 100%;
 }
 .reacted-people {
   margin-left: 20px;

@@ -2,13 +2,65 @@
 
     <div class="container newsFeed-body">
         <!-- left block -->
-        <div class="left-block">
+        <div class="sticky left-block">
+            <div
+                style="color: black;font-size: 18px;font-weight: 22px;margin-bottom:10px; text-decoration: underline lightseagreen;">
+                WHO'S FOLLOWNIG</div>
+            <div class="friend-list-search">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search Following..."
+                        aria-label="Search">
+                </form>
+            </div>
+            <div class="friend-list">
+                <!-- //loop through friend-list -->
+                <div class="friend-list-item testbg">
+                    <img class="avatar avatar-margin dis-inline-block" src=" /img/profileD.png" alt="">
+                    <span class="dis-inline-block">username</span>
+                    <span class="add-friend-option">
+                        <a class="btn-with-a" href="">Add friend</a>
+                    </span>
+                </div>
+                <div class="friend-list-item testbg">
+                    <img class="avatar avatar-margin dis-inline-block" src=" /img/profileD.png" alt="">
+                    <span class="dis-inline-block">username</span>
+                    <span class="add-friend-option">
+                        <a class="btn-with-a" href="">Add friend</a>
+                    </span>
+                </div>
 
+            </div>
         </div>
 
         <!-- right block -->
-        <div class="right-block">
+        <div class="sticky right-block">
+            <div
+                style="color: black;font-size: 18px;font-weight: 22px;margin-bottom:10px; text-decoration: underline lightseagreen;">
+                FRIENDS</div>
+            <div class="friend-list-search">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search Contacts..."
+                        aria-label="Search">
+                </form>
+            </div>
+            <div class="friend-list">
+                <!-- //loop through friend-list -->
+                <div class="friend-list-item testbg">
+                    <img class="avatar avatar-margin dis-inline-block" src=" /img/profileD.png" alt="">
+                    <span class="dis-inline-block">username</span>
+                    <span class="friend-status">
+                        <a class="btn-with-a" href="">status here "</a>
+                    </span>
+                </div>
+                <div class="friend-list-item testbg">
+                    <img class="avatar avatar-margin dis-inline-block" src=" /img/profileD.png" alt="">
+                    <span class="dis-inline-block">username</span>
+                    <span class="friend-status">
+                        <a class="btn-with-a" href="">status here "</a>
+                    </span>
+                </div>
 
+            </div>
         </div>
 
         <!-- center block -->
@@ -26,17 +78,20 @@
                 <div class="row">
                     <div class="col-4">
                         <a href="#" class="btn-with-a">
-                            <img src="" alt="!"> Photo/Video
+                            <!-- <img src="" alt="!"> -->
+                            Photo/Video
                         </a>
                     </div>
                     <div class="col-4">
                         <a href="#" class="btn-with-a">
-                            <img src="" alt="!"> Tag Friends
+                            <!-- <img src="" alt="!">  -->
+                            Tag Friends
                         </a>
                     </div>
                     <div class="col-4">
                         <a href="#" class="btn-with-a">
-                            <img src="" alt="!"> Feeling/Activity
+                            <!-- <img src="" alt="!">  -->
+                            Feeling/Activity
                         </a>
                     </div>
 
@@ -48,7 +103,7 @@
 
         <!-- loop on post content to post content here -->
         <div class="post-list">
-            <div class="post-data-with-information">
+            <div class="container post-data-with-information">
                 <img class="avatar avatar-margin" src="/img/profileD.png" alt="profileD.png not found!">
                 <span>username who posted this post</span>
                 <div class="time-position">time when posted</div>
