@@ -25,6 +25,8 @@ const createSendToken = (user, statusCode, req, res) => {
 
   // Remove password from output
   user.password = undefined;
+  // process.env.userId = user.id;
+  // process.env.userName = user.username;
   res.status(statusCode).json({
     status: 'OK',
     token: token,
@@ -33,6 +35,9 @@ const createSendToken = (user, statusCode, req, res) => {
     },
   });
 };
+exports.getMe = catchAsync(async (req, res, next) => {
+  next();
+});
 
 exports.signup = catchAsync(async (req, res, next) => {
   // Creating a new User

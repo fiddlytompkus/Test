@@ -6,6 +6,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const userRouter = require(`${__dirname}/routes/userRoutes`);
 const viewRouter = require(`${__dirname}/routes/viewRoutes`);
+const postRouter = require(`${__dirname}/routes/postRoutes`);
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./Controller/errorController');
 const bodyParser = require('body-parser');
@@ -43,6 +44,7 @@ app.use(express.static(`${__dirname}/public`));
 //routes
 app.use('/', viewRouter);
 app.use('/v1/users/', userRouter);
+app.use('/v1/posts/', postRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this Server`, 404));

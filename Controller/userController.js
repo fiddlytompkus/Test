@@ -81,7 +81,7 @@ exports.GetUser = catchAsync(async (req, res, next) => {
   const IdUser = await User.findById(req.params.id);
 
   if (!IdUser) {
-    return next(new AppError('No Tour found with that ID', 404));
+    return next(new AppError('No user found with that ID', 404));
   }
 
   res.status(200).json({
@@ -99,7 +99,7 @@ exports.UpdateUser = catchAsync(async (req, res, next) => {
   });
 
   if (!IdUser) {
-    return next(new AppError('No Tour found with that ID', 404));
+    return next(new AppError('No user found with that ID', 404));
   }
 
   res.status(200).json({
@@ -114,7 +114,7 @@ exports.DeleteUser = catchAsync(async (req, res, next) => {
   const IdUser = await User.findByIdAndDelete(req.params.id);
 
   if (!IdUser) {
-    return next(new AppError('No Tour found with that ID', 404));
+    return next(new AppError('No user found with that ID', 404));
   }
 
   res.status(204).json({
