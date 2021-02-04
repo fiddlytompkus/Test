@@ -1,0 +1,255 @@
+.testbg {
+  background-color: teal;
+}
+.nav-con {
+  padding: 10px 20px 10px 20px;
+}
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+}
+@media screen and (max-width: 1200px) {
+  .left-block {
+    display: none;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .left-block {
+    height: 100vh;
+    width: 265px;
+    margin-left: -50px;
+    background-color: orchid;
+    float: left;
+    padding: 10px;
+    display: block;
+    position: sticky;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .right-block {
+    display: none;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .right-block {
+    height: 100vh;
+    width: 265px;
+    margin-right: -50px;
+    float: right;
+    display: block;
+    position: relative;
+    position: sticky;
+    padding: 10px;
+    position: -webkit-sticky;
+    background-color: orchid;
+    position: sticky;
+  }
+  .friend-list {
+    max-height: 100vh;
+    overflow: scroll;
+  }
+  .friend-list-item {
+    height: 70px;
+  }
+  .friend-list-search {
+    margin: 10px;
+  }
+  .add-friend-option {
+    display: block;
+    margin-left: 75px;
+    margin-top: -20px;
+  }
+  .friend-status {
+    display: block;
+    margin-left: 75px;
+    margin-top: -20px;
+  }
+}
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.avatar-margin {
+  margin: 10px 10px -8px 10px;
+}
+
+.newsFeed-body {
+  margin-top: 100px;
+}
+.list-of-status {
+  margin: 120px auto;
+  max-width: 640px;
+  background-color: blue;
+  border-color: black;
+  border-width: 5px;
+  height: 206px;
+  overflow: auto;
+}
+.status-img {
+  height: 200px;
+  width: 150px;
+  border-radius: 5px;
+  margin: 3px;
+}
+.post-form {
+  background-color: brown;
+  margin: -100px auto;
+  max-width: 640px;
+  height: 140px;
+  border-radius: 7px;
+}
+.post-form-l1 {
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+}
+.post-input {
+  /* FIXME */
+  /* max-width: 512px; */
+  width: 80%;
+  margin-top: 15px;
+  margin-left: 0px;
+  height: 50px;
+  border-radius: 10px;
+}
+.jump-letter {
+  font-size: 30px;
+  display: inline;
+  font-family: cursive;
+  font-weight: 400;
+  animation-name: none;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+.btn-with-a {
+  text-decoration: none;
+}
+.post-list {
+  max-width: 640px;
+  margin: 125px auto;
+  background-color: orange;
+  height: auto;
+  /* height: 20000px; */
+  padding-left: 32px;
+  padding-right: 8px;
+  padding-bottom: 50px;
+  padding-top: 1px;
+}
+.time-position {
+  position: relative;
+  margin-top: -18px;
+  margin-left: 70px;
+}
+.post-data-with-information {
+  margin-top: 50px;
+  max-width: 576px;
+  /* width: 576px; */
+  background-color: red;
+  height: 418px;
+}
+.post-summary {
+  padding: 6px;
+  font-size: 16px;
+  font-weight: 200;
+  font-style: italic;
+}
+.img-or-video {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 230px;
+  border-radius: 5px;
+  /* max-width: 576px; */
+  /* width: 576px; */
+  width: 100%;
+}
+.reacted-people {
+  margin-left: 20px;
+  font-size: 14px;
+  display: inline;
+  font-family: monospace;
+}
+.comments-count {
+  font-size: 14px;
+  display: inline;
+  font-family: monospace;
+  margin-right: 20px;
+  float: right;
+}
+.Comments {
+  text-decoration: none;
+  color: black;
+}
+.Comments-Hide {
+  display: none;
+  padding: 10px 0px 5px 0px;
+  background-color: grey;
+  max-width: 576px;
+  height: auto;
+  margin-top: -9px;
+}
+.dis-inline-block {
+  display: inline-flex;
+}
+.who-commented {
+}
+.comment-section {
+  margin-top: 15px;
+  background-color: honeydew;
+  border-radius: 5px;
+  border-style: groove;
+  border-width: 2px;
+  z-index: 1;
+  max-width: 486px;
+  min-height: 40px;
+}
+.feature-on-comment {
+  z-index: inherit;
+  margin-left: 75px;
+  background-color: honeydew;
+  border-radius: 5px;
+  border-style: groove;
+  border-width: 2px;
+  max-width: 486px;
+  height: 20px;
+  margin-top: -5px;
+  min-height: auto;
+}
+.add-on {
+  font-family: monospace;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 300;
+  vertical-align: auto;
+}
+.comment-inherited {
+  margin-top: 5px;
+  background-color: honeydew;
+  border-radius: 5px;
+  border-style: groove;
+  border-width: 1px;
+  z-index: 1;
+  /* width: 34vw; */
+  max-width: 297px;
+  min-height: 40px;
+  margin-left: 125px;
+}
+@keyframes animateJump {
+  0% {
+    color: aqua;
+  }
+  25% {
+    color: green;
+  }
+  50% {
+    color: aqua;
+  }
+  75% {
+    color: orange;
+  }
+  100% {
+    color: aqua;
+  }
+}

@@ -5,40 +5,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- CSS only -->
+    <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/cc38e1150e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/newsfeed.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">ChitChat</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top  nav-con">
+        <a class="navbar-brand" href="/newsFeed">
+            <img src="/img/logo.png" width=50px height=50px alt="logo.png not found!" style="margin-bottom: 10px;">
+            <div class="jump-letter">C</div>
+            <div class="jump-letter">H</div>
+            <div class="jump-letter">I</div>
+            <div class="jump-letter">T</div>
+            <div class="jump-letter">C</div>
+            <div class="jump-letter">H</div>
+            <div class="jump-letter">A</div>
+            <div class="jump-letter">T</div>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <div class="collapse navbar-collapse justify-content-end" id="navbarText">
+            <div class=" search-form">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-home"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fab fa-facebook-messenger"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="far fa-compass"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="far fa-heart"></i></a>
-                </li>
-            </ul>
+            </div>
+
+            <span class="nav-item dis-inline-block">
+                <a class="nav-link" href="#"><i class="fas fa-home"></i></a>
+            </span>
+            <span class="nav-item dis-inline-block">
+                <a class="nav-link" href="#"><i class="fab fa-facebook-messenger"></i></a>
+            </span>
+            <span class="nav-item dis-inline-block">
+                <a class="nav-link" href="#"><i class="far fa-compass"></i></a>
+            </span>
+            <span class="nav-item dis-inline-block">
+                <a class="nav-link" href="#"><i class="far fa-heart"></i></a>
+            </span>
+
+            <div class="nav-item dropdown dis-inline-block">
+                <a id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="avatar" src="/img/profileD.png" alt="profileD.png not found!">
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Saved</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Switch Accounts</a></li>
+                    <li><a class="dropdown-item" href="#">Signout</a></li>
+                </ul>
+            </div>
+
         </div>
     </nav>

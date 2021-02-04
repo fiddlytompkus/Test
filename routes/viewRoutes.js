@@ -11,4 +11,7 @@ router.route('/register').get((req, res, next) => {
 router.route('/forgotPassword').get((req, res, next) => {
   res.render('forgotPassword.ejs');
 });
+router.route('/newsFeed').get((req, res, next) => {
+  res.render('newsFeed.ejs');
+});
 module.exports = router;
