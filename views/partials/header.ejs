@@ -10,9 +10,10 @@
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    <script src="/javascripts/bootstrapJS.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
     <script src="https://kit.fontawesome.com/cc38e1150e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/newsfeed.css">
 </head>
@@ -55,17 +56,30 @@
                 <a class="nav-link" href="#"><i class="far fa-heart"></i></a>
             </span>
 
-            <div class="nav-item dropdown dis-inline-block">
-                <a id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- <div class="nav-item dropdown dis-inline-block">
+                <a id="dropdownMenu2" class="dropleft" data-bs-toggle="dropdown" aria-expanded="false">
                     <img class="avatar" src="/img/profileD.png" alt="profileD.png not found!">
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Saved</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Switch Accounts</a></li>
-                    <li><a class="dropdown-item" href="#">Signout</a></li>
+                    <li><a class="dropdown-item test" href="#">Profile</a></li>
+                    <li><a class="dropdown-item test" href="#">Saved</a></li>
+                    <li><a class="dropdown-item test" href="#">Settings</a></li>
+                    <li><a class="dropdown-item test" href="#">Switch Accounts</a></li>
+                    <li><a class="dropdown-item test" href="#">Signout</a></li>
                 </ul>
+            </div> -->
+            <div class="btn-group dropleft">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Dropleft
+                </button>
+                <div class="dropdown-menu">
+                    <li><a class="dropdown-item test" href="#">Profile</a></li>
+                    <li><a class="dropdown-item test" href="#">Saved</a></li>
+                    <li><a class="dropdown-item test" href="#">Settings</a></li>
+                    <li><a class="dropdown-item test" href="#">Switch Accounts</a></li>
+                    <li><a class="dropdown-item test" href="#">Signout</a></li>
+                </div>
             </div>
 
         </div>

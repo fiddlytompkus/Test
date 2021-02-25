@@ -2,10 +2,17 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
   text: String,
-  dateadded: String,
+  dateadded: {
+    type: Date,
+    default: Date.now(),
+  },
   isEdited: {
     type: Boolean,
     default: false,
+  },
+  postId: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Post',
   },
   authorId: {
     type: mongoose.Schema.ObjectId,

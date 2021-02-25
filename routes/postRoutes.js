@@ -1,9 +1,10 @@
 const express = require('express');
 const PostController = require('./../Controller/postController');
 const authController = require('./../Controller/authController');
+const commentRoutes = require('./commentRoutes');
 
 const router = express.Router();
-
+router.use('/:postId/comments', commentRoutes);
 router
   .route('/')
   .get(PostController.getAllPost)
