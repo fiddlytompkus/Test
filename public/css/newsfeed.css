@@ -1,3 +1,24 @@
+/* custom scroller for friend-list only */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
 .testbg {
   background-color: teal;
 }
@@ -45,9 +66,10 @@
     background-color: orchid;
     position: sticky;
   }
+
   .friend-list {
-    max-height: 100vh;
-    overflow: scroll;
+    max-height: 350px;
+    overflow-y: scroll;
   }
   .friend-list-item {
     height: 70px;
@@ -85,8 +107,8 @@
   background-color: blue;
   border-color: black;
   border-width: 5px;
-  height: 206px;
-  overflow: auto;
+  max-height: 206px;
+  overflow-x: auto;
 }
 .status-img {
   height: 200px;
@@ -252,4 +274,9 @@
   100% {
     color: aqua;
   }
+}
+
+.test {
+  margin-right: 1000px;
+  padding-right: 1em;
 }
