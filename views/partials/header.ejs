@@ -1,86 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- CSS only -->
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
     <!-- JavaScript Bundle with Popper -->
     <!-- JavaScript Bundle with Popper -->
     <script src="/javascripts/bootstrapJS.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script> -->
-    <script src="https://kit.fontawesome.com/cc38e1150e.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/newsfeed.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/newsfeed.css" />
+  </head>
 
-<body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top  nav-con">
-        <a class="navbar-brand" href="/newsFeed">
-            <img src="/img/logo.png" width=50px height=50px alt="logo.png not found!" style="margin-bottom: 10px;">
-            <div class="jump-letter">C</div>
-            <div class="jump-letter">H</div>
-            <div class="jump-letter">I</div>
-            <div class="jump-letter">T</div>
-            <div class="jump-letter">C</div>
-            <div class="jump-letter">H</div>
-            <div class="jump-letter">A</div>
-            <div class="jump-letter">T</div>
-        </a>
+  <body>
+    <nav
+      class="navbar navbar-expand-md navbar-light bg-light fixed-top nav-con"
+    >
+      <a class="navbar-brand" href="/newsFeed">
+        <img
+          src="/img/logo.png"
+          width="50px"
+          height="50px"
+          alt="logo.png not found!"
+          style="margin-bottom: 10px"
+        />
+        <div class="jump-letter">C</div>
+        <div class="jump-letter">H</div>
+        <div class="jump-letter">I</div>
+        <div class="jump-letter">T</div>
+        <div class="jump-letter">C</div>
+        <div class="jump-letter">H</div>
+        <div class="jump-letter">A</div>
+        <div class="jump-letter">T</div>
+      </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarText">
-            <div class=" search-form">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                </form>
-            </div>
-
-            <span class="nav-item dis-inline-block">
-                <a class="nav-link" href="#"><i class="fas fa-home"></i></a>
-            </span>
-            <span class="nav-item dis-inline-block">
-                <a class="nav-link" href="#"><i class="fab fa-facebook-messenger"></i></a>
-            </span>
-            <span class="nav-item dis-inline-block">
-                <a class="nav-link" href="#"><i class="far fa-compass"></i></a>
-            </span>
-            <span class="nav-item dis-inline-block">
-                <a class="nav-link" href="#"><i class="far fa-heart"></i></a>
-            </span>
-
-            <!-- <div class="nav-item dropdown dis-inline-block">
-                <a id="dropdownMenu2" class="dropleft" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="avatar" src="/img/profileD.png" alt="profileD.png not found!">
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a class="dropdown-item test" href="#">Profile</a></li>
-                    <li><a class="dropdown-item test" href="#">Saved</a></li>
-                    <li><a class="dropdown-item test" href="#">Settings</a></li>
-                    <li><a class="dropdown-item test" href="#">Switch Accounts</a></li>
-                    <li><a class="dropdown-item test" href="#">Signout</a></li>
-                </ul>
-            </div> -->
-            <div class="btn-group dropleft">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Dropleft
-                </button>
-                <div class="dropdown-menu">
-                    <li><a class="dropdown-item test" href="#">Profile</a></li>
-                    <li><a class="dropdown-item test" href="#">Saved</a></li>
-                    <li><a class="dropdown-item test" href="#">Settings</a></li>
-                    <li><a class="dropdown-item test" href="#">Switch Accounts</a></li>
-                    <li><a class="dropdown-item test" href="#">Signout</a></li>
-                </div>
-            </div>
-
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarText">
+        <div class="search-form">
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </form>
         </div>
+
+        <span class="nav-item dis-inline-block">
+          <a class="nav-link" href="#"><i class="fas fa-home"></i></a>
+        </span>
+        <span class="nav-item dis-inline-block">
+          <a class="nav-link" href="#"
+            ><i class="fab fa-facebook-messenger"></i
+          ></a>
+        </span>
+        <span class="nav-item dis-inline-block">
+          <a class="nav-link" href="#"><i class="far fa-compass"></i></a>
+        </span>
+        <span class="nav-item dis-inline-block">
+          <a class="nav-link" href="#"><i class="far fa-heart"></i></a>
+        </span>
+
+        <div class="nav-item dropdown dis-inline-block">
+          <a
+            id="dropdownMenu2"
+            class="dropleft"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              class="avatar"
+              src="/img/profileD.png"
+              alt="profileD.png not found!"
+            />
+          </a>
+          <ul
+            class="dropdown-menu"
+            style="margin-left: -7em"
+            aria-labelledby="dropdownMenu2"
+          >
+            <li><a class="dropdown-item test" href="#">Profile</a></li>
+            <li><a class="dropdown-item test" href="#">Saved</a></li>
+            <li><a class="dropdown-item test" href="#">Settings</a></li>
+            <li><a class="dropdown-item test" href="#">Switch Accounts</a></li>
+            <li><a class="dropdown-item test" href="#">Signout</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
+  </body>
+</html>

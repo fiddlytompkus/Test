@@ -61,9 +61,7 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
     const newComment = await commentModel.findByIdAndDelete(CommentId);
     if (newComment) {
       const index = Post.comments.indexOf(CommentId);
-      if (index > -1) {
         Post.comments.splice(index, 1);
-      }
       Post.save();
       return res.status(200).json({
         status: 'success',
