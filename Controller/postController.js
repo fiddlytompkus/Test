@@ -81,14 +81,13 @@ exports.getPostById = catchAsync(async (req, res, next) => {
 
 exports.Like = catchAsync(async (req, res, next) => {
   const username = req.user.username;
-  // console.log(username);
   const post_id = req.params.postId;
   const post = await Post.findById(post_id);
   if (!post) {
     return next(new AppError('No Post Found', 404));
   } else {
-    if (post.likes.find((el) => username)) {
-      const index = post.likes.indexOf(username);
+    const index = post.likes.indexOf(username);
+    if (index > -1) {
       post.likes.splice(index, 1);
     } else {
       post.likes.push(username);

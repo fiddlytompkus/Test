@@ -41,4 +41,8 @@ router
     UserController.DeleteUser
   );
 
+router.use(authController.protectAccess);
+router.route('/:id/addFriend').patch(UserController.addFriend);
+router.route('/:id/removeFriend').patch(UserController.removeFriend);
+
 module.exports = router;

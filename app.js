@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
 const userRouter = require(`${__dirname}/routes/userRoutes`);
 const viewRouter = require(`${__dirname}/routes/viewRoutes`);
 const postRouter = require(`${__dirname}/routes/postRoutes`);
@@ -25,7 +26,7 @@ app.use('/v1', limiter);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ limit: '10kb' }));
-
+app.use(cookieParser());
 //data sanization against noSQL query injections
 app.use(mongoSanitize());
 
