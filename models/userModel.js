@@ -63,6 +63,12 @@ const userSchema = new mongoose.Schema({
     default: true,
     select: false,
   },
+  friendList: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {

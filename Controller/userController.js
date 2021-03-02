@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const validator = require('validator');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const { post } = require('../routes/userRoutes');
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -121,4 +122,38 @@ exports.DeleteUser = catchAsync(async (req, res, next) => {
     status: 'success',
     data: null,
   });
+});
+exports.addFriend = catchAsync(async (req, res, next) => {
+  const userId = req.params.id;
+  const searchedUser = await User.findById(userId);
+  if (searchedUser) {
+    const CurrentUser = await User.findById(req.user.id);
+    const index = CurrentUser.friendList.indexOf(userId);
+    if (index == -1) {
+      CurrentUser.friendList.push(userId);
+      CurrentUser.save({ validateBeforeSave: false });
+    }
+    return res.status(200).json({
+      status: 'Success',
+    });
+  } else {
+    return next(new AppError('No user found with given id', 404));
+  }
+});
+exports.removeFriend = catchAsync(async (req, res, next) => {
+  const userId = req.params.id;
+  const searchedUser = await User.findById(userId);
+  if (searchedUser) {
+    const CurrentUser = await User.findById(req.user.id);
+    const index = CurrentUser.friendList.indexOf(userId);
+    if (index > -1) {
+      CurrentUser.friendList.splice(index, 1);
+      CurrentUser.save({ validateBeforeSave: false });
+    }
+    return res.status(200).json({
+      status: 'Success',
+    });
+  } else {
+    return next(new AppError('No user found with given id', 404));
+  }
 });

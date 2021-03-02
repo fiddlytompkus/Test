@@ -1,4 +1,5 @@
 'use strict';
+
 var jumpLetter = document.querySelectorAll('.jump-letter');
 var i = 0;
 for (i = 0; i < jumpLetter.length; i++) {
@@ -35,3 +36,37 @@ for (i = 0; i < allImgOrVideo.length; i++) {
     }
   });
 }
+
+//like here
+var liketoggle = document.querySelectorAll('.like-color-toggle');
+for (var i = 0; i < liketoggle.length; i++) {
+  liketoggle[i].addEventListener('click', async (event) => {
+    var id = event.target
+      .closest('.post-data-with-information')
+      .getAttribute('data-id');
+    console.log(id);
+    // try {
+    //   const res = await axios({
+    //     method: 'POST',
+    //     url: '/v1/posts/`${id}`/like',
+    //   });
+    // } catch (err) {
+    //   console.log('haagg diye beta');
+    // }
+  });
+}
+// Onwards post modal window
+var postModalBtn = document.querySelector('.post-input');
+var postModal = document.querySelector('.Post-Modal');
+var postModalClose = document.querySelector('.closeModalWindow');
+postModalBtn.addEventListener('click', () => {
+  postModal.style.display = 'block';
+});
+window.onclick = function (event) {
+  if (event.target == postModal) {
+    postModal.style.display = 'none';
+  }
+};
+postModalClose.addEventListener('click', () => {
+  postModal.style.display = 'none';
+});

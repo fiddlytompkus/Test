@@ -11,13 +11,13 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red;
+  background: #aaaaaa;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
+  background: #aaaaaa;
 }
 .testbg {
   background-color: teal;
@@ -51,9 +51,13 @@
   .right-block {
     display: none;
   }
+  .right-block-profile-card {
+    display: none;
+  }
 }
 @media screen and (min-width: 1200px) {
   .right-block {
+    /* FIXME */
     height: 100vh;
     width: 265px;
     margin-right: -50px;
@@ -65,8 +69,20 @@
     position: -webkit-sticky;
     background-color: orchid;
     position: sticky;
+    margin-top: 390px;
+    margin-right: -265px;
   }
-
+  .right-block-profile-card {
+    height: 365px;
+    width: 265px;
+    margin-right: -50px;
+    float: right;
+    display: block;
+    position: relative;
+    /* padding: 10px;
+    padding-top: 22px; */
+    background-color: rgb(24, 25, 26);
+  }
   .friend-list {
     max-height: 350px;
     overflow-y: scroll;
@@ -136,6 +152,15 @@
   margin-left: 0px;
   height: 50px;
   border-radius: 10px;
+  background-color: rgb(166, 171, 167);
+  text-align: left;
+}
+.post-input:hover {
+  background-color: rgb(132, 138, 133);
+}
+.post-input:focus {
+  outline-color: rgb(132, 138, 133);
+  outline-width: 0em;
 }
 .jump-letter {
   font-size: 30px;
@@ -152,11 +177,11 @@
 .post-list {
   max-width: 640px;
   margin: 125px auto;
-  background-color: orange;
+  /* background-color: orange; */
+  background-color: rgb(24, 25, 26);
   height: auto;
   /* height: 20000px; */
-  padding-left: 32px;
-  padding-right: 8px;
+
   padding-bottom: 50px;
   padding-top: 1px;
 }
@@ -166,17 +191,26 @@
   margin-left: 70px;
 }
 .post-data-with-information {
-  margin-top: 50px;
-  max-width: 576px;
+  margin-top: -1px;
+  margin-bottom: 30px;
+  max-width: 640px;
+  border-radius: 8px;
   /* width: 576px; */
-  background-color: red;
-  height: 418px;
+  background-color: rgb(36, 37, 39);
+  /* height: 418px; */
+  height: auto;
+  color: #aaaaaa;
+}
+.post-data-font {
+  color: lightcyan;
 }
 .post-summary {
   padding: 6px;
   font-size: 16px;
   font-weight: 200;
   font-style: italic;
+  max-height: 80px;
+  overflow-y: scroll;
 }
 .img-or-video {
   margin-top: 10px;
@@ -200,10 +234,6 @@
   margin-right: 20px;
   float: right;
 }
-.Comments {
-  text-decoration: none;
-  color: black;
-}
 .Comments-Hide {
   display: none;
   padding: 10px 0px 5px 0px;
@@ -211,6 +241,7 @@
   max-width: 576px;
   height: auto;
   margin-top: -9px;
+  /* z-index: 1; */
 }
 .dis-inline-block {
   display: inline-flex;
@@ -223,12 +254,15 @@
   border-radius: 5px;
   border-style: groove;
   border-width: 2px;
-  z-index: 1;
+  /* z-index: 1; */
   max-width: 486px;
   min-height: 40px;
 }
+.on-hover-cursor {
+  cursor: pointer;
+}
 .feature-on-comment {
-  z-index: inherit;
+  /* z-index: inherit; */
   margin-left: 75px;
   background-color: honeydew;
   border-radius: 5px;
@@ -241,10 +275,19 @@
 }
 .add-on {
   font-family: monospace;
-  font-size: 14px;
+  font-size: 18px;
+  padding-top: 10px;
   text-decoration: none;
   font-weight: 300;
   vertical-align: auto;
+  padding-bottom: 10px;
+  align-content: center;
+  padding-left: 65px;
+  margin-left: -2px;
+}
+.add-on:hover {
+  background-color: rgb(58, 59, 61);
+  border-radius: 5px;
 }
 .comment-inherited {
   margin-top: 5px;
@@ -252,7 +295,7 @@
   border-radius: 5px;
   border-style: groove;
   border-width: 1px;
-  z-index: 1;
+  /* z-index: 1; */
   /* width: 34vw; */
   max-width: 297px;
   min-height: 40px;
@@ -279,4 +322,155 @@
 .test {
   margin-right: 1000px;
   padding-right: 1em;
+}
+
+/* Post-Modal goes here */
+.Post-Modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 10px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal-content {
+  background-color: #dfdddd;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 638px;
+}
+.highLightIt {
+  font-size: 20px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  font-weight: 9px;
+  align-self: flex-start;
+}
+.closeModalWindow {
+  color: #aaaaaa;
+  font-size: 28px;
+  /* align-self: flex-end; */
+  margin-top: -10px;
+  font-weight: bold;
+}
+
+.closeModalWindow:hover,
+.closeModalWindow:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* till here */
+.modal-header {
+  margin-top: -15px;
+  margin-bottom: -10px;
+}
+.post-input-inModal {
+  max-width: 638px;
+  height: 180px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 0;
+  resize: none;
+  margin-top: 10px;
+  background-color: #f0f0f0;
+}
+.post-input-inModal:focus {
+  outline: none;
+}
+.modal-footer {
+  /* float: inline-start; */
+  margin-right: 630;
+  display: inline-block;
+}
+.image-video-file-btn {
+  /* background-color: indigo; */
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin: 5px;
+}
+.Post-Btn {
+  background-color: rgb(41, 133, 175);
+  border-radius: 0.3rem;
+  float: right;
+  cursor: pointer;
+  height: 30px;
+  border: 0;
+  width: 60px;
+}
+.Post-Btn:focus {
+  outline-color: rgb(41, 133, 175);
+}
+.show-username {
+  font-size: 19px;
+  font-family: cursive;
+  font-weight: 100;
+  margin-top: 10px;
+  color: rgb(5, 77, 77);
+}
+.username-pos-modal {
+  margin-right: 370px;
+  margin-top: -15px;
+}
+@media screen and (max-width: 600px) {
+  .username-pos-modal {
+    margin-right: 220px;
+  }
+}
+.avatar-center {
+  margin-top: 25px;
+  margin-left: 94px;
+}
+.Profile-Card-Pic-Up {
+  margin-top: -35px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  z-index: 1;
+}
+.Profile-Card {
+  height: 365px;
+  border-radius: 13px;
+  background-color: blueviolet;
+}
+.bg-profile-pic {
+  z-index: -1;
+  height: 100px;
+  width: 265px;
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+}
+.show-custom-card-status {
+  text-align: center;
+  font-size: 14px;
+  font-style: italic;
+  margin: 6px 14px 4px 14px;
+}
+.sub-part {
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* no select */
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+.footer-data {
+  margin-top: 48vh;
+  height: 100px;
+  margin-left: -10px;
+  width: 265px;
+  background-color: khaki;
 }

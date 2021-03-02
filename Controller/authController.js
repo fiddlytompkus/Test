@@ -103,7 +103,7 @@ exports.protectAccess = catchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(' ')[1];
   }
-
+  if (req.cookies.jwt) token = req.cookies.jwt;
   //   console.log(token);
   if (!token) {
     return next(
@@ -135,7 +135,7 @@ exports.protectAccess = catchAsync(async (req, res, next) => {
 
   // GRANT ACCESS TO PROTECTED ROUTES
   req.user = currentUser;
-
+  res.locals.user = currentUser;
   next();
 });
 
