@@ -2,7 +2,7 @@ const User = require('../models/userModel');
 const validator = require('validator');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
-const { post } = require('../routes/userRoutes');
+// const { post } = require('../routes/userRoutes');
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -124,14 +124,15 @@ exports.DeleteUser = catchAsync(async (req, res, next) => {
   });
 });
 exports.addFriend = catchAsync(async (req, res, next) => {
-  const userId = req.params.id;
-  const searchedUser = await User.findById(userId);
+  const userId = req.params.id; // friends id
+  const searchedUser = await User.findById(userId); // friend User
   if (searchedUser) {
-    const CurrentUser = await User.findById(req.user.id);
-    const index = CurrentUser.friendList.indexOf(userId);
+    const index = req.user.friendList.indexOf(userId);
     if (index == -1) {
-      CurrentUser.friendList.push(userId);
-      CurrentUser.save({ validateBeforeSave: false });
+      req.user.friendList.push(userId);
+      searchedUser.friendList.push(req.user.id);
+      req.user.save({ validateBeforeSave: false });
+      searchedUser.save({ validateBeforeSave: false });
     }
     return res.status(200).json({
       status: 'Success',
@@ -144,11 +145,16 @@ exports.removeFriend = catchAsync(async (req, res, next) => {
   const userId = req.params.id;
   const searchedUser = await User.findById(userId);
   if (searchedUser) {
-    const CurrentUser = await User.findById(req.user.id);
-    const index = CurrentUser.friendList.indexOf(userId);
+    const CurrentUser = req.user;
+    var index = CurrentUser.friendList.indexOf(userId);
     if (index > -1) {
       CurrentUser.friendList.splice(index, 1);
       CurrentUser.save({ validateBeforeSave: false });
+      var new_id = searchedUser.friendList.indexOf(req.user.id);
+      if (new_id > -1) {
+        searchedUser.friendList.splice(new_id, 1);
+        searchedUser.save({ validateBeforeSave: false });
+      }
     }
     return res.status(200).json({
       status: 'Success',

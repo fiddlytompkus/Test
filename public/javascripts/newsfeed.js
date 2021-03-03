@@ -44,15 +44,36 @@ for (var i = 0; i < liketoggle.length; i++) {
     var id = event.target
       .closest('.post-data-with-information')
       .getAttribute('data-id');
-    console.log(id);
-    // try {
-    //   const res = await axios({
-    //     method: 'POST',
-    //     url: '/v1/posts/`${id}`/like',
-    //   });
-    // } catch (err) {
-    //   console.log('haagg diye beta');
-    // }
+    // console.log(id);
+    // console.log('/v1/posts/' + id + '/like');
+    const urrl = '/v1/posts/' + id + '/like';
+    try {
+      const res = await axios({
+        method: 'PATCH',
+        url: urrl,
+      }).then((res) => {
+        if (res.data.status == 'OK') {
+          if (res.data.liked) {
+            // console.log('I came Here');
+            var element = event.target
+              .closest('.post-data-with-information')
+              .querySelector('.not-liked');
+            // console.log(element);
+            element.classList.remove('not-liked');
+            element.classList.add('liked-already');
+          } else {
+            var element = event.target
+              .closest('.post-data-with-information')
+              .querySelector('.liked-already');
+            // console.log(element);
+            element.classList.add('not-liked');
+            element.classList.remove('liked-already');
+          }
+        }
+      });
+    } catch (err) {
+      console.log('Sry for Inconvinience');
+    }
   });
 }
 // Onwards post modal window

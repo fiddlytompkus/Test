@@ -16,11 +16,14 @@ router.route('/forgotPassword').get((req, res, next) => {
   res.render('forgotPassword.ejs');
 });
 
-router.use(authController.protectAccess);
-router.route('/newsFeed').get(async (req, res, next) => {
-  const post = await Post.find();
-  res.render('newsFeed.ejs', {
-    allPosts: post,
+// router.use(authController.protectAccess);
+router
+  .route('/newsFeed')
+  .get(authController.protectAccess, async (req, res, next) => {
+    const post = await Post.find();
+    // console.log(post);
+    res.render('newsFeed.ejs', {
+      allPosts: post,
+    });
   });
-});
 module.exports = router;

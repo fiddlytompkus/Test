@@ -1,248 +1,335 @@
 <%- include('partials/header.ejs') %>
 
-  <div class="container newsFeed-body">
-    <!-- left block -->
-    <div class="sticky left-block">
-      <div style="
+<div class="container newsFeed-body">
+  <!-- left block -->
+  <div class="sticky left-block">
+    <div
+      style="
         color: black;
         font-size: 18px;
         font-weight: 22px;
         margin-bottom: 10px;
         text-decoration: underline lightseagreen;
-      ">
-        WHO'S FOLLOWNIG
-      </div>
-      <div class="friend-list-search">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search Following..." aria-label="Search" />
-        </form>
-      </div>
-      <div class="friend-list">
-        <!-- //loop through friend-list -->
-        <div class="friend-list-item testbg">
-          <img class="avatar avatar-margin dis-inline-block" src=" /img/profileD.png" alt="" />
-          <span class="dis-inline-block">username</span>
-          <span class="add-friend-option">
-            <a class="btn-with-a" href="">Add friend</a>
-          </span>
-        </div>
-      </div>
+      "
+    >
+      WHO'S FOLLOWNIG
     </div>
-
-    <!-- right block -->
-    <div class="right-block-profile-card">
-      <div class="Profile-Card">
-        <img class="bg-profile-pic" src="/img/statusD.jfif" alt="" />
-        <img class="avatar avatar-center Profile-Card-Pic-Up" src="/img/profileD.png" alt="" />
-        <div class="show-username noselect" style="margin-left: 50px;text-decoration: underline;">
-          <%= user.firstname%>
-            <%= user.lastname%>
-        </div>
-        <div class="show-custom-card-status">
-          Make friends but never best friends because they are the one who hurt you first
-        </div>
-        <hr>
-        <div style="display: inline;">
-          <span class="sub-part" style="margin-left: 20px;">Who viewed your profile</span>
-          <span class="sub-part" style="float: right;margin-right: 20px;">12</span>
-        </div>
-        <div style="display: inline;">
-          <span class="sub-part" style="margin-left: 20px;">Connections</span>
-          <span class="sub-part" style="float: right;margin-right: 20px;">163</span>
-        </div>
-        <div>
-          <span class="sub-part" style="margin-left: 20px;font-weight:500;">Grow your network</span>
-        </div>
-
-      </div>
+    <div class="friend-list-search">
+      <form class="form-inline my-2 my-lg-0">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search Following..."
+          aria-label="Search"
+        />
+      </form>
     </div>
-    <div class="sticky right-block">
-      <div style="
-        color: black;
-        font-size: 18px;
-        font-weight: 22px;
-        margin-bottom: 10px;
-        text-decoration: underline lightseagreen;
-      ">
-        FRIENDS
-      </div>
-      <div class="friend-list-search">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search Contacts..." aria-label="Search" />
-        </form>
-      </div>
-      <div class="friend-list">
-        <!-- //loop through friend-list -->
-        <% for(var list of user.friendList) { %>
-          <div class="friend-list-item testbg">
-            <img class="avatar avatar-margin dis-inline-block" src=" /img/profileD.png" alt="" />
-            <span class="dis-inline-block">username</span>
-            <span class="friend-status">
-              <a class="btn-with-a" href="">status here "</a>
-            </span>
-          </div>
-          <% }%>
-      </div>
-      <div class="footer-data">
-        bunty noob hai auor rahega
-        in ejs line no 86 and
-        \in css 452
-      </div>
-    </div>
-
-    <!-- center block -->
-    <div class="list-of-status">
-      <!-- loop here to list out all status -->
-      <img src="/img/statusD.jfif" alt="status not found" class="status-img" />
-    </div>
-    <div class="post-form">
-      <div class="post-form-l1">
-        <img class="avatar avatar-margin" src="/img/profileD.png" alt="profileD.png not found!" />
-        <!-- <form action=""> -->
-        <!-- <input class="post-input" type="button" placeholder="What's on your mind, username ?" aria-label="post" /> -->
-        <button class="post-input" aria-label="post" type="button">What's on your mind, <%= user.firstname%> ?</button>
-        <hr />
-        <div class="row">
-          <div class="col-4">
-            <a href="#" class="btn-with-a">
-              <!-- <img src="" alt="!"> -->
-              Photo/Video
-            </a>
-          </div>
-          <div class="col-4">
-            <a href="#" class="btn-with-a">
-              <!-- <img src="" alt="!">  -->
-              Tag Friends
-            </a>
-          </div>
-          <div class="col-4">
-            <a href="#" class="btn-with-a">
-              <!-- <img src="" alt="!">  -->
-              Feeling/Activity
-            </a>
-          </div>
-        </div>
-        <!-- </form> -->
-      </div>
-    </div>
-
-    <!-- loop on post content to post content here -->
-    <div class="post-list">
-      <% for(var list of allPosts) { %>
-
-        <div data-id="<%= list.id %>" class="post-data-with-information">
-
-          <img class="avatar avatar-margin" src="/img/profileD.png" alt="profileD.png not found!" />
-          <span class="show-username">
-            <%= list.authorUsername %>
-          </span>
-          <div class="time-position">
-            <%= list.createdDate.getDate() %>/<%= list.createdDate.getMonth() %>/<%= list.createdDate.getFullYear() %>
-          </div>
-          <div class="post-summary">
-            <%= list.postContent %>
-          </div>
-          <img class="img-or-video" src="/img/statusD.jfif" alt="" />
-          <div class="reacted-people">
-            <%= list.likes.length %> and 5 others
-          </div>
-          <div class="comments-count">
-            <a data-wow="2" class="Comments">
-              <%= list.comments.length %> Comments
-            </a>
-          </div>
-          <hr class="dropdown-divider" />
-          <div class="row" style="margin-left: 1vw">
-            <div class="col-4 on-hover-cursor add-on like-color-toggle noselect" style="margin-left: -10px;"><i
-                class="fas fa-thumbs-up"></i>&nbsp;Like</div>
-            <div data-wow="2" class="col-4 noselect on-hover-cursor add-on">
-              <i class="fas fa-comment-alt"></i>&nbsp;Comment
-            </div>
-            <div class="col-4 on-hover-cursor add-on noselect"><i class="fas fa-share"></i>&nbsp;Share</div>
-          </div>
-          <!-- <hr class="dropdown-divider" /> -->
-          <div class="Comments-Hide">
-            <!-- loop through comment model to display here -->
-            <!-- one comment  -->
-            <div class="who-commented">
-              <img class="avatar avatar-margin dis-inline-block" src="/img/profileD.png" alt="" />
-              <div class="comment-section dis-inline-block">
-                bunty noob hai bunty noob haibunty noob haibunty noob haibunty noob
-                haibunty noob haibunty noob hai bunty noob haibunty noob haibunty
-                noob haibunty noob haibunty noob haibunty noob hai bunty noob
-                haibunty noob haibunty noob haibunty noob haibunty noob haibunty
-                noob hai bunty noob haibunty noob haibunty noob haibunty noob
-                haibunty noob haibunty noob hai
-              </div>
-
-              <div class="feature-on-comment">
-                <div class="row" style="margin-left: 1vw">
-                  <div class="col-4 add-on">👍like</div>
-                  <div class="col-4 add-on">
-                    <a data-wow="2" class="Comments"> reply </a>
-                  </div>
-                  <div class="col-4">report</div>
-                </div>
-              </div>
-
-              <div class="comment-inherited">tu galat hai</div>
-            </div>
-            <!-- one comment -->
-          </div>
-        </div>
-        <% } %>
-    </div>
-  </div>
-  <!-- onwards post modal -->
-  <div id="Post-Modal" class="Post-Modal">
-    <div class="modal-content">
-      <div style="display: inline;">
-        <span class="highLightIt">Create a post</span>
-        <span style="float: right;" class="closeModalWindow">&times;</span>
-      </div>
-      <hr>
-      <div class="modal-header">
-        <img class="avatar" src="/img/profileD.png" alt="profileD.png not found!" />
-        <span class="show-username username-pos-modal">
-          <%= user.username%>
+    <div class="friend-list">
+      <!-- //loop through friend-list -->
+      <div class="friend-list-item testbg">
+        <img
+          class="avatar avatar-margin dis-inline-block"
+          src=" /img/profileD.png"
+          alt=""
+        />
+        <span class="dis-inline-block">username</span>
+        <span class="add-friend-option">
+          <a class="btn-with-a" href="">Add friend</a>
         </span>
       </div>
-      <textarea class="post-input-inModal" type="text" placeholder="What's on your mind, <%= user.firstname%> ?"
-        aria-label="post"></textarea>
-      <div class="modal-footer">
-        <!-- image upload-->
-        <input type="file" accept="image/*" id="actual-btn-one" hidden />
-        <label class="image-video-file-submit-btn" for="actual-btn-one">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-image-fill"
-            viewBox="0 0 16 16">
-            <path
-              d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2V3zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z" />
-          </svg>
-        </label>
-        <!-- video upload -->
-        <input type="file" accept="video/*" id="actual-btn-two" hidden />
-        <label class="image-video-file-btn" for="actual-btn-two">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-            class="bi bi-camera-reels-fill" viewBox="0 0 16 16">
-            <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-            <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-            <path
-              d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z" />
-          </svg>
-        </label>
-        <!-- document upload -->
-        <input type="file" id="actual-btn-three" hidden />
-        <label class="image-video-file-btn" for="actual-btn-three">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-earmark"
-            viewBox="0 0 16 16">
-            <path
-              d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
-          </svg>
-        </label>
-        <button type="button" class="Post-Btn">Post</button>
+    </div>
+  </div>
+
+  <!-- right block -->
+  <div class="right-block-profile-card">
+    <div class="Profile-Card">
+      <img class="bg-profile-pic" src="/img/statusD.jfif" alt="" />
+      <img
+        class="avatar avatar-center Profile-Card-Pic-Up"
+        src="/img/profileD.png"
+        alt=""
+      />
+      <div class="show-username noselect" style="text-decoration: underline">
+        <%= user.firstname%> <%= user.lastname%>
+      </div>
+      <div class="show-custom-card-status">
+        Make friends but never best friends because they are the one who hurt
+        you first
+      </div>
+      <hr />
+      <div style="display: inline">
+        <span class="sub-part" style="margin-left: 20px"
+          >Who viewed your profile</span
+        >
+        <span class="sub-part" style="float: right; margin-right: 20px"
+          >12</span
+        >
+      </div>
+      <div style="display: inline">
+        <span class="sub-part" style="margin-left: 20px">Connections</span>
+        <span class="sub-part" style="float: right; margin-right: 20px"
+          >163</span
+        >
+      </div>
+      <div>
+        <span class="sub-part" style="margin-left: 20px; font-weight: 500"
+          >Grow your network</span
+        >
       </div>
     </div>
   </div>
-  <!-- till here -->
-  <script src="/javascripts/newsfeed.js"></script>
-  <%- include('partials/footer.ejs') %>
+  <div class="sticky right-block">
+    <div
+      style="
+        color: white;
+        font-size: 18px;
+        font-weight: 22px;
+        margin-bottom: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* text-decoration: underline lightseagreen; */
+        text-align: center;
+      "
+    >
+      FRIENDS
+    </div>
+    <div>
+      <form class="form-inline my-2 my-lg-0 friend-list-search">
+        <input
+          class="form-control mr-sm-2 search-form"
+          type="search"
+          placeholder="🕵🏻‍♂️&nbsp; Search"
+          aria-label="Search"
+        />
+      </form>
+    </div>
+    <div class="friend-list">
+      <!-- //loop through friend-list -->
+      <!-- <script>
+        console.log(user.friendList);
+      </script> -->
+      <% for(var list of friendlist) { %>
+      <div class="friend-list-item">
+        <img
+          class="avatar avatar-margin dis-inline-block"
+          src=" /img/profileD.png"
+          alt=""
+        />
+        <span class="dis-inline-block show-username"><%= list.username %></span>
+        <span class="friend-status">
+          <a class="btn-with-a" href="">status here "</a>
+        </span>
+      </div>
+      <% }%>
+    </div>
+    <div class="footer-data">
+      bunty noob hai auor rahega in ejs line no 86 and \in css 452
+    </div>
+  </div>
+
+  <!-- center block -->
+  <div class="list-of-status">
+    <!-- loop here to list out all status -->
+    <img src="/img/statusD.jfif" alt="status not found" class="status-img" />
+  </div>
+  <div class="post-form">
+    <div class="post-form-l1">
+      <img
+        class="avatar avatar-margin"
+        src="/img/profileD.png"
+        alt="profileD.png not found!"
+      />
+      <!-- <form action=""> -->
+      <!-- <input class="post-input" type="button" placeholder="What's on your mind, username ?" aria-label="post" /> -->
+      <button class="post-input" aria-label="post" type="button">
+        What's on your mind, <%= user.firstname%> ?
+      </button>
+      <hr />
+      <div class="row">
+        <div class="col-4">
+          <a href="#" class="btn-with-a">
+            <!-- <img src="" alt="!"> -->
+            Photo/Video
+          </a>
+        </div>
+        <div class="col-4">
+          <a href="#" class="btn-with-a">
+            <!-- <img src="" alt="!">  -->
+            Tag Friends
+          </a>
+        </div>
+        <div class="col-4">
+          <a href="#" class="btn-with-a">
+            <!-- <img src="" alt="!">  -->
+            Feeling/Activity
+          </a>
+        </div>
+      </div>
+      <!-- </form> -->
+    </div>
+  </div>
+
+  <!-- loop on post content to post content here -->
+  <div class="post-list">
+    <% for(var list of allPosts) { %>
+
+    <div data-id="<%= list.id %>" class="post-data-with-information">
+      <img
+        class="avatar avatar-margin"
+        src="/img/profileD.png"
+        alt="profileD.png not found!"
+      />
+      <span class="show-username"> <%= list.authorUsername %> </span>
+      <div class="time-position">
+        <%= list.createdDate.getDate() %>/<%= list.createdDate.getMonth() %>/<%=
+        list.createdDate.getFullYear() %>
+      </div>
+      <div class="post-summary"><%= list.postContent %></div>
+      <img class="img-or-video" src="/img/statusD.jfif" alt="" />
+      <div class="reacted-people"><%= list.likes.length %> and 5 others</div>
+      <div class="comments-count">
+        <a data-wow="2" class="Comments">
+          <%= list.comments.length %> Comments
+        </a>
+      </div>
+      <hr class="dropdown-divider" />
+      <div class="row" style="margin-left: 1vw">
+        <div
+          class="col-4 on-hover-cursor add-on noselect like-color-toggle"
+          style="margin-left: -10px"
+        >
+          <% if (list.likes.indexOf(user.username)> -1) {%>
+          <div class="liked-already">
+            <i class="fas fa-thumbs-up"></i>&nbsp;Like
+          </div>
+          <%} else {%>
+          <div class="not-liked">
+            <i class="fas fa-thumbs-up"></i>&nbsp;Like
+          </div>
+          <%}%>
+        </div>
+        <div data-wow="2" class="col-4 noselect on-hover-cursor add-on">
+          <i class="fas fa-comment-alt"></i>&nbsp;Comment
+        </div>
+        <div class="col-4 on-hover-cursor add-on noselect">
+          <i class="fas fa-share"></i>&nbsp;Share
+        </div>
+      </div>
+      <!-- <hr class="dropdown-divider" /> -->
+      <div class="Comments-Hide">
+        <!-- loop through comment model to display here -->
+        <!-- one comment  -->
+        <div class="who-commented">
+          <img
+            class="avatar avatar-margin dis-inline-block"
+            src="/img/profileD.png"
+            alt=""
+          />
+          <div class="comment-section dis-inline-block">
+            bunty noob hai bunty noob haibunty noob haibunty noob haibunty noob
+            haibunty noob haibunty noob hai bunty noob haibunty noob haibunty
+            noob haibunty noob haibunty noob haibunty noob hai bunty noob
+            haibunty noob haibunty noob haibunty noob haibunty noob haibunty
+            noob hai bunty noob haibunty noob haibunty noob haibunty noob
+            haibunty noob haibunty noob hai
+          </div>
+
+          <div class="feature-on-comment">
+            <div class="row" style="margin-left: 1vw">
+              <div class="col-4 add-on">👍like</div>
+              <div class="col-4 add-on">
+                <a data-wow="2" class="Comments"> reply </a>
+              </div>
+              <div class="col-4">report</div>
+            </div>
+          </div>
+
+          <div class="comment-inherited">tu galat hai</div>
+        </div>
+        <!-- one comment -->
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+<!-- onwards post modal -->
+<div id="Post-Modal" class="Post-Modal">
+  <div class="modal-content">
+    <div style="display: inline">
+      <span class="highLightIt">Create a post</span>
+      <span style="float: right" class="closeModalWindow">&times;</span>
+    </div>
+    <hr />
+    <div class="modal-header">
+      <img
+        class="avatar"
+        src="/img/profileD.png"
+        alt="profileD.png not found!"
+      />
+      <span class="show-username username-pos-modal">
+        <%= user.username%>
+      </span>
+    </div>
+    <textarea
+      class="post-input-inModal"
+      type="text"
+      placeholder="What's on your mind, <%= user.firstname%> ?"
+      aria-label="post"
+    ></textarea>
+    <div class="modal-footer">
+      <!-- image upload-->
+      <input type="file" accept="image/*" id="actual-btn-one" hidden />
+      <label class="image-video-file-submit-btn" for="actual-btn-one">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-image-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2V3zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"
+          />
+        </svg>
+      </label>
+      <!-- video upload -->
+      <input type="file" accept="video/*" id="actual-btn-two" hidden />
+      <label class="image-video-file-btn" for="actual-btn-two">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-camera-reels-fill"
+          viewBox="0 0 16 16"
+        >
+          <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+          <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+          <path
+            d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z"
+          />
+        </svg>
+      </label>
+      <!-- document upload -->
+      <input type="file" id="actual-btn-three" hidden />
+      <label class="image-video-file-btn" for="actual-btn-three">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-file-earmark"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"
+          />
+        </svg>
+      </label>
+      <button type="button" class="Post-Btn">Post</button>
+    </div>
+  </div>
+</div>
+<!-- till here -->
+<script src="/javascripts/newsfeed.js"></script>
+<%- include('partials/footer.ejs') %>

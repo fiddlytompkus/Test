@@ -23,7 +23,7 @@
   background-color: teal;
 }
 .nav-con {
-  padding: 10px 20px 10px 20px;
+  padding: 7px 20px 7px 20px;
 }
 .sticky {
   position: -webkit-sticky;
@@ -67,10 +67,11 @@
     position: sticky;
     padding: 10px;
     position: -webkit-sticky;
-    background-color: orchid;
+    background-color: rgb(36, 37, 39);
     position: sticky;
     margin-top: 390px;
     margin-right: -265px;
+    border-radius: 6px;
   }
   .right-block-profile-card {
     height: 365px;
@@ -84,8 +85,10 @@
     background-color: rgb(24, 25, 26);
   }
   .friend-list {
+    margin-top: 15px;
     max-height: 350px;
     overflow-y: scroll;
+    border-radius: 10px;
   }
   .friend-list-item {
     height: 70px;
@@ -131,6 +134,10 @@
   width: 150px;
   border-radius: 5px;
   margin: 3px;
+}
+.search-form {
+  border-radius: 15px;
+  background-color: rgb(166, 171, 167);
 }
 .post-form {
   background-color: brown;
@@ -413,7 +420,8 @@
   font-family: cursive;
   font-weight: 100;
   margin-top: 10px;
-  color: rgb(5, 77, 77);
+  text-align: center;
+  color: white;
 }
 .username-pos-modal {
   margin-right: 370px;
@@ -426,7 +434,7 @@
 }
 .avatar-center {
   margin-top: 25px;
-  margin-left: 94px;
+  margin-left: 105px;
 }
 .Profile-Card-Pic-Up {
   margin-top: -35px;
@@ -438,7 +446,7 @@
 .Profile-Card {
   height: 365px;
   border-radius: 13px;
-  background-color: blueviolet;
+  background-color: rgb(189, 173, 204);
 }
 .bg-profile-pic {
   z-index: -1;
@@ -473,4 +481,11 @@
   margin-left: -10px;
   width: 265px;
   background-color: khaki;
+}
+
+.liked-already {
+  color: blue;
+}
+.not-liked {
+  color: #dfdddd;
 }

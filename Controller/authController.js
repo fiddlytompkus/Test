@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const AppError = require('./../utils/appError');
 const sendEmail = require('./../utils/email');
 const validator = require('validator');
+const { findById } = require('./../models/userModel');
 
 const SignToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -136,6 +137,11 @@ exports.protectAccess = catchAsync(async (req, res, next) => {
   // GRANT ACCESS TO PROTECTED ROUTES
   req.user = currentUser;
   res.locals.user = currentUser;
+  var friends = [];
+  for (var i = 0; i < currentUser.friendList.length; i++) {
+    friends.push(await User.findById(currentUser.friendList[i]));
+  }
+  res.locals.friendlist = friends;
   next();
 });
 

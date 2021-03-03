@@ -89,6 +89,9 @@ userSchema.pre('save', function (next) {
 userSchema.pre(/^find/, function (next) {
   // this points to current querry
   this.find({ active: { $ne: false } });
+  // this.populate({
+  //   path: 'friendList',
+  // });
   next();
 });
 
