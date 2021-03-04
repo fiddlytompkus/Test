@@ -26,4 +26,10 @@ router
       allPosts: post,
     });
   });
+router
+  .route('/profile')
+  .get(authController.protectAccess, async (req, res, next) => {
+    const post = await Post.find();
+    res.render('profile.ejs', { allPosts: post });
+  });
 module.exports = router;

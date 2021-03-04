@@ -1,0 +1,126 @@
+.profile-card-outside {
+  margin-top: 80px;
+  height: 390px;
+  background-color: rgb(36, 37, 39);
+  width: 100%;
+}
+.profile-card-inside {
+  margin-top: 80px;
+  height: 260px;
+  background-color: rgb(24, 25, 26);
+  max-width: 700px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: -1;
+}
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-top: -160px;
+  z-index: 1;
+}
+.profile-name {
+  font-size: 30px;
+  font-weight: 400;
+  color: white;
+  font-family: cursive;
+  margin-top: -10px;
+}
+.profile-separtor {
+  max-width: 700px;
+  color: white;
+}
+.profile-navbar-inline {
+  margin-left: 100px;
+  max-width: 700px;
+  background-color: blue;
+  float: left;
+  height: 100px;
+}
+.profile-navbar-items {
+  display: inline;
+  color: white;
+  text-align: center;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding: 8px 15px 8px 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: cursive;
+  font-weight: 200;
+}
+.profile-navbar-items:hover {
+  background-color: rgb(156, 157, 158);
+}
+.profile-content {
+  max-width: 700px;
+  align-content: center;
+  height: 170px;
+}
+.profile-left-block {
+  height: 169px;
+  float: left;
+  background-color: rgb(36, 37, 39);
+  border-radius: 8px;
+  width: 240px;
+  margin-top: 25px;
+  display: block;
+}
+@media screen and (max-width: 800px) {
+  .profile-left-block {
+    display: none;
+  }
+}
+.profile-post-content {
+  /* max-width: 700px; */
+  width: 445px;
+  border-radius: 8px;
+  margin-top: 25px;
+  float: right;
+}
+@media screen and (max-width: 800px) {
+  .profile-post-content {
+    float: none;
+  }
+}
+.profile-post-form-add-margin {
+  margin-top: 0px;
+}
+.profile-content-top {
+  height: auto;
+  max-width: 700px;
+  /* background-color: brown; */
+  align-self: center;
+  height: 300px;
+}
+.profile-post-list {
+  margin-top: -70px;
+}
+.profile-intro-box {
+  color: white;
+  font-size: 18px;
+  font-family: cursive;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.intro-box-item {
+  font-size: 14px;
+  border-width: 20px;
+  border-bottom: white;
+  border-top: white;
+  font-family: cursive;
+  color: white;
+  padding: 6px 2px 6px 2px;
+}
+.intro-box-item-edit {
+  font-weight: 200;
+  margin-left: 4px;
+  margin-right: 4px;
+  background-color: rgb(132, 138, 133);
+  border-radius: 5px;
+}
+.intro-box-item-edit:hover {
+  background-color: rgb(81, 83, 82);
+  border-radius: 5px;
+}
