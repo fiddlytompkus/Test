@@ -5,7 +5,11 @@ const AppError = require('./../utils/appError');
 
 exports.getAllPostComments = catchAsync(async (req, res, next) => {
   const PostId = req.params.postId;
-  const postData = await postModel.findById(PostId);
+  const postData = await postModel
+    .findById(PostId)
+    .populate({ path: 'comments' })
+    .select('comments');
+  res.locals.currentComments = postData;
   res.status(200).json({
     status: 'Ok',
     data: postData,
@@ -61,7 +65,7 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
     const newComment = await commentModel.findByIdAndDelete(CommentId);
     if (newComment) {
       const index = Post.comments.indexOf(CommentId);
-        Post.comments.splice(index, 1);
+      Post.comments.splice(index, 1);
       Post.save();
       return res.status(200).json({
         status: 'success',

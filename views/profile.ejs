@@ -1,0 +1,77 @@
+<%- include('partials/header.ejs') %>
+    <div class="profile-card-outside">
+        <center>
+            <div class="profile-card-inside">
+                <!-- <img class="" src="" alt=""> -->
+            </div>
+            <img class="profile-avatar" src=" /img/profileD.png" alt="" />
+            <div class="profile-name">
+                <%= user.firstname %>&nbsp;<%=user.lastname%>
+            </div>
+            <hr class="profile-separtor">
+            <div>
+                <div clas="profile-navbar-inline row sticky fixed-top">
+                    <div class="col-3 profile-navbar-items">Posts</div>
+                    <div class="col-3 profile-navbar-items">About</div>
+                    <div class="col-3 profile-navbar-items"> Friends</div>
+                    <div class="col-3 profile-navbar-items"> Photos</div>
+                </div>
+            </div>
+            <!-- </center> -->
+            <div class="profile-content">
+                <div class="profile-content-top">
+                    <div class="profile-left-block">
+                        <div class="profile-intro-box">Intro</div>
+                        <div class="intro-box-item">Studied at KV GONDA</div>
+                        <div class="intro-box-item">Lives in Gonda</div>
+                        <div class="intro-box-item">From Plilibhit</div>
+                        <div class="intro-box-item intro-box-item-edit noselect">Edit details</div>
+                    </div>
+                    <div class="profile-post-content">
+                        <div class="post-form profile-post-form-add-margin">
+                            <div class="post-form-l1">
+                                <img class="avatar avatar-margin" src="/img/profileD.png"
+                                    alt="profileD.png not found!" />
+                                <button class="post-input" aria-label="post" type="button">
+                                    What's on your mind, <%= user.firstname%> ?
+                                </button>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a href="#" class="btn-with-a">
+                                            Photo/Video
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#" class="btn-with-a">
+                                            Tag Friends
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#" class="btn-with-a">
+                                            Feeling/Activity
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="profile-post-list">
+                    <%- include('partials/postListContent.ejs') %>
+                </div>
+
+
+
+            </div>
+
+
+
+        </center>
+
+    </div>
+    <%- include('partials/postModalForm.ejs') %>
+
+        <script src="/javascripts/profile.js"></script>
+        <%- include('partials/footer.ejs') %>
