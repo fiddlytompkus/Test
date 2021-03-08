@@ -109,11 +109,8 @@ for (var i = 0; i < commentSection.length; i++) {
       .display;
     if (commentHideSection == 'block') {
       elementPost.querySelector('.Comments-Hide').style.display = 'none';
-      // console.log(elementPost.querySelector('.Comments-Hide'));
-      // elementPost
-      //   .querySelector('.Comments-Hide')
-      //   .removeChild(elementPost.querySelector('.Comments-Hide').firstChild);
-      // FIXME remove element
+      // console.log(elementPost.querySelector('.Comments-Hide').innerHTML);
+      elementPost.querySelector('.Comments-Hide').innerHTML = '';
       return;
     }
     var id = elementPost.getAttribute('data-id');
@@ -128,25 +125,35 @@ for (var i = 0; i < commentSection.length; i++) {
         var short = response.data.data.comments;
         for (var i = 0; i < short.length; i++) {
           var commentData = `<div class="who-commented">
-              <img class="avatar avatar-margin dis-inline-block" src="/img/profileD.png" alt="" /> <div class="comment-section dis-inline-block">
-                  ${short[i].text}
-              </div>
+          <img class="avatar avatar-margin dis-inline-block" src="/img/profileD.png" alt="" />
+          <div class="comment-section dis-inline-block">
+              ${short[i].text}
+          </div>
 
-              <div class="feature-on-comment">
-                  <div class="row" style="margin-left: 1vw">
-                      <div class="col-4 add-on">👍like</div>
-                      <div class="col-4 add-on">
-                          <a data-wow="2" class="Comments"> reply </a>
-                      </div>
-                      <div class="col-4">report</div>
+          <div class="feature-on-comment">
+              <div class="row" style="margin-left: 1vw">
+                  <div class="col-4"> <i class="fas fa-thumbs-up"></i>&nbsp;Like</div>
+                  <div class="col-4">
+                      <svg style="margin-bottom: 2px;" xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                          fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
+                          <path
+                              d="M5.921 11.9L1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                      </svg>
+                      Reply
                   </div>
+                  <div class="col-4"><i class="fas fa-flag"></i>&nbsp;Report</div>
               </div>
+          </div>
 
-              <!-- <div class="comment-inherited">tu galat hai</div> -->
-          </div>`;
+          <!-- <div class="comment-inherited">tu galat hai</div> -->
+      </div>`;
           full += commentData;
         }
         var doc = new DOMParser().parseFromString(full, 'text/html');
+        console.log(doc.documentElement);
+        // doc.documentElement.getElementsByTagName('BODY').bgColor = 'red';
+        // console.log();
+        // console.log(doc.all[0].getElementsByTagName('body'));
         elementPost
           .querySelector('.Comments-Hide')
           .appendChild(doc.documentElement);
@@ -154,7 +161,7 @@ for (var i = 0; i < commentSection.length; i++) {
       elementPost.querySelector('.Comments-Hide').style.display = 'block';
     } catch (error) {
       console.log(
-        'Error occur while requesting for comments in nesfeed.js on line 127 approx'
+        'Error occur while requesting for comments in nesfeed.js on line 167 approx'
       );
     }
   });
