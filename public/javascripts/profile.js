@@ -4,7 +4,7 @@ var postModal = document.querySelector('.Post-Modal');
 var postModalClose = document.querySelector('.closeModalWindow');
 postModalBtn.addEventListener('click', () => {
   postModal.style.display = 'block';
-  console.log(postModal);
+  // console.log(postModal);
 });
 window.onclick = function (event) {
   if (event.target == postModal) {

@@ -1,4 +1,4 @@
-'use strict';
+('use strict');
 
 var jumpLetter = document.querySelectorAll('.jump-letter');
 var i = 0;
@@ -31,8 +31,6 @@ for (var i = 0; i < liketoggle.length; i++) {
     var id = event.target
       .closest('.post-data-with-information')
       .getAttribute('data-id');
-    // console.log(id);
-    // console.log('/v1/posts/' + id + '/like');
     const urrl = '/v1/posts/' + id + '/like';
     try {
       const res = await axios({
@@ -115,16 +113,26 @@ for (var i = 0; i < commentSection.length; i++) {
     }
     var id = elementPost.getAttribute('data-id');
     const urrl = '/v1/posts/' + id + '/comments';
+    var resp;
     try {
       const response = await axios({
         method: 'GET',
         url: urrl,
       });
+      try {
+        resp = await axios({
+          method: 'GET',
+          url: '/v1/users/getMe',
+        });
+      } catch (err) {
+        console.log(err.message);
+      }
       if (response.data.status == 'Ok') {
         var full = '';
         var short = response.data.data.comments;
         for (var i = 0; i < short.length; i++) {
-          var commentData = `<div class="who-commented">
+          if (short[i].authorUsername == resp.data.user.username) {
+            var commentData = `<div class="who-commented">
           <img class="avatar avatar-margin dis-inline-block" src="/img/profileD.png" alt="" />
           <div class="comment-section dis-inline-block">
               ${short[i].text}
@@ -132,8 +140,8 @@ for (var i = 0; i < commentSection.length; i++) {
 
           <div class="feature-on-comment">
               <div class="row" style="margin-left: 1vw">
-                  <div class="col-4"> <i class="fas fa-thumbs-up"></i>&nbsp;Like</div>
-                  <div class="col-4">
+                  <div class="col-4 button-format-comment"> <i class="fas fa-thumbs-up"></i>&nbsp;Like</div>
+                  <div class="col-4 button-format-comment">
                       <svg style="margin-bottom: 2px;" xmlns="http://www.w3.org/2000/svg" width="21" height="21"
                           fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
                           <path
@@ -141,22 +149,48 @@ for (var i = 0; i < commentSection.length; i++) {
                       </svg>
                       Reply
                   </div>
-                  <div class="col-4"><i class="fas fa-flag"></i>&nbsp;Report</div>
+                  <div class="col-4 button-format-comment comment-select" comment-id="${short[i]._id}"><i class="fas fa-trash"></i>&nbsp;Delete</div>
               </div>
           </div>
 
           <!-- <div class="comment-inherited">tu galat hai</div> -->
       </div>`;
-          full += commentData;
+            full += commentData;
+          } else {
+            var commentData = `<div class="who-commented">
+          <img class="avatar avatar-margin dis-inline-block" src="/img/profileD.png" alt="" />
+          <div class="comment-section dis-inline-block">
+              ${short[i].text}
+          </div>
+
+          <div class="feature-on-comment">
+              <div class="row" style="margin-left: 1vw">
+                  <div class="col-4 button-format-comment"> <i class="fas fa-thumbs-up"></i>&nbsp;Like</div>
+                  <div class="col-4 button-format-comment">
+                      <svg style="margin-bottom: 2px;" xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                          fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
+                          <path
+                              d="M5.921 11.9L1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                      </svg>
+                      Reply
+                  </div>
+              </div>
+          </div>
+
+          <!-- <div class="comment-inherited">tu galat hai</div> -->
+      </div>`;
+            full += commentData;
+          }
         }
         var doc = new DOMParser().parseFromString(full, 'text/html');
-        console.log(doc.documentElement);
+        // console.log(doc.documentElement);
         // doc.documentElement.getElementsByTagName('BODY').bgColor = 'red';
         // console.log();
         // console.log(doc.all[0].getElementsByTagName('body'));
         elementPost
           .querySelector('.Comments-Hide')
           .appendChild(doc.documentElement);
+        Deleting_Comment(elementPost);
       }
       elementPost.querySelector('.Comments-Hide').style.display = 'block';
     } catch (error) {
@@ -193,8 +227,18 @@ for (var i = 0; i < commentPost.length; i++) {
           text: commentData,
         },
       });
-      if (response.data.status == 'Ok')
+      if (response.data.status == 'Ok') {
+        commentDiv
+          .querySelector('.comments-count')
+          .querySelector('.Comments').textContent =
+          response.data.length + ' Comments';
         commentDiv.querySelector('.commentPostData').value = '';
+        var comment_hide_cls = commentDiv.querySelector('.Comments-Hide');
+        if (comment_hide_cls) {
+          comment_hide_cls.style.display = 'none';
+          comment_hide_cls.innerHTML = '';
+        }
+      }
     } catch (error) {
       console.log(
         'error occured in newsfeed.js on line 176 apporx, while posting comment'
@@ -202,4 +246,39 @@ for (var i = 0; i < commentPost.length; i++) {
       console.log(error.message);
     }
   });
+}
+
+// Deleting Comment
+function Deleting_Comment(elementPost) {
+  const postComment = document.querySelectorAll('.comment-select');
+  for (var i = 0; i < postComment.length; i++) {
+    postComment[i].addEventListener('click', async (event) => {
+      var id = event.target
+        .closest('.post-data-with-information')
+        .getAttribute('data-id');
+      var comment_id = event.target
+        .closest('.comment-select')
+        .getAttribute('comment-id');
+      const urrl = '/v1/posts/' + id + '/comments/' + comment_id;
+      try {
+        const response = await axios({
+          method: 'DELETE',
+          url: urrl,
+        });
+        if (response.data.status == 'success') {
+          elementPost.querySelector('.Comments-Hide').style.display = 'none';
+          elementPost.querySelector('.Comments-Hide').innerHTML = '';
+          elementPost
+            .querySelector('.comments-count')
+            .querySelector('.Comments').textContent =
+            response.data.length + ' Comments';
+        }
+      } catch (error) {
+        console.log(
+          'error occured in newsfeed.js on line 229 apporx, while deleting comment'
+        );
+        console.log(error.message);
+      }
+    });
+  }
 }

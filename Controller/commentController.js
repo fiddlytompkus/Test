@@ -29,10 +29,11 @@ exports.createComment = catchAsync(async (req, res, next) => {
     FindPost.comments.push(commentCreate.id);
     FindPost.save();
     let query = await postModel.findById(PostId).populate('comments');
-    console.log(query);
+    // console.log(query);
     return res.status(200).json({
       status: 'Ok',
       data: commentCreate,
+      length: FindPost.comments.length,
     });
   }
   next(new AppError('no post found with that Id', 404));
@@ -69,7 +70,7 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
       Post.save();
       return res.status(200).json({
         status: 'success',
-        data: null,
+        length: Post.comments.length,
       });
     }
   }

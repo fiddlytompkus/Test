@@ -580,3 +580,7 @@
 .not-liked {
   color: #dfdddd;
 }
+
+.button-format-comment:hover {
+  cursor: pointer;
+}

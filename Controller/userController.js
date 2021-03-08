@@ -123,6 +123,7 @@ exports.DeleteUser = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
 exports.addFriend = catchAsync(async (req, res, next) => {
   const userId = req.params.id; // friends id
   const searchedUser = await User.findById(userId); // friend User
@@ -141,6 +142,7 @@ exports.addFriend = catchAsync(async (req, res, next) => {
     return next(new AppError('No user found with given id', 404));
   }
 });
+
 exports.removeFriend = catchAsync(async (req, res, next) => {
   const userId = req.params.id;
   const searchedUser = await User.findById(userId);
@@ -163,3 +165,9 @@ exports.removeFriend = catchAsync(async (req, res, next) => {
     return next(new AppError('No user found with given id', 404));
   }
 });
+
+exports.getMe = (req, res) => {
+  res.status(200).json({
+    user: res.locals.user,
+  });
+};
