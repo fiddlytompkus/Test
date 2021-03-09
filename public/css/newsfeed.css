@@ -151,17 +151,18 @@
   background-color: rgb(166, 171, 167);
 }
 .post-form {
-  background-color: brown;
+  background-color: rgb(36, 37, 39);
   margin: -100px auto;
   max-width: 640px;
   height: 140px;
-  border-radius: 7px;
+  border-radius: 10px;
 }
 .post-form-l1 {
   margin-left: 10px;
   margin-right: 10px;
   position: relative;
 }
+
 .post-input {
   /* FIXME */
   /* max-width: 512px; */
@@ -183,7 +184,7 @@
 .jump-letter {
   font-size: 30px;
   display: inline;
-  font-family: cursive;
+  font-family: 'Andrellina';
   font-weight: 400;
   animation-name: none;
   animation-duration: 3s;
@@ -205,7 +206,7 @@
 }
 .time-position {
   position: relative;
-  margin-top: -18px;
+  margin-top: -14px;
   margin-left: 70px;
 }
 .post-data-with-information {
@@ -270,6 +271,8 @@
 .who-commented {
   margin-top: 0px;
   max-width: 624px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 .comment-section {
   margin-top: 15px;
@@ -306,7 +309,7 @@
   border-radius: 8px;
   height: auto;
   max-width: 640px;
-  background-color: aqua;
+  background-color: rgb(36, 37, 39);
 }
 .Comment-Post-Avatar {
   margin-left: 15px;

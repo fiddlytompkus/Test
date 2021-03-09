@@ -4,8 +4,8 @@ const postSchema = new mongoose.Schema({
   caption: String,
   postContent: String,
   createdDate: {
-    type: Date,
-    default: Date.now(),
+    type: Number,
+    default: new Date().getTime(),
   },
   isEdited: {
     type: Boolean,

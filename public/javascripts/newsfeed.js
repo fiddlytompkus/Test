@@ -13,7 +13,12 @@ for (var i = 0; i < liketoggle.length; i++) {
         url: urrl,
       }).then((res) => {
         if (res.data.status == 'OK') {
+          event.target
+            .closest('.post-data-with-information')
+            .querySelector('.likes-count').textContent =
+            res.data.data.length + ' like(s)';
           if (res.data.liked) {
+            // console.log('I came Here');
             var element = event.target
               .closest('.post-data-with-information')
               .querySelector('.not-liked');
@@ -35,7 +40,6 @@ for (var i = 0; i < liketoggle.length; i++) {
     }
   });
 }
-
 // Onwards post modal window
 var postModalBtn = document.querySelector('.post-input');
 var postModal = document.querySelector('.Post-Modal');
@@ -73,7 +77,7 @@ submitPostBTN.addEventListener('submit', async (e) => {
   }
 });
 
-//getting comment on request
+//Posting comment
 const commentSection = document.querySelectorAll('.commentSection');
 for (var i = 0; i < commentSection.length; i++) {
   commentSection[i].addEventListener('click', async (event) => {
@@ -107,7 +111,7 @@ for (var i = 0; i < commentSection.length; i++) {
         var short = response.data.data.comments;
         for (var i = 0; i < short.length; i++) {
           if (short[i].authorUsername == resp.data.user.username) {
-            var commentData = `<div class="who-commented">
+            var commentData = `<div class="who-commented " style = "background-color : grey">
           <img class="avatar avatar-margin dis-inline-block" src="/img/profileD.png" alt="" />
           <div class="comment-section dis-inline-block">
               ${short[i].text}
@@ -132,7 +136,7 @@ for (var i = 0; i < commentSection.length; i++) {
       </div>`;
             full += commentData;
           } else {
-            var commentData = `<div class="who-commented">
+            var commentData = `<div class="who-commented" style = "background-color : grey">
           <img class="avatar avatar-margin dis-inline-block" src="/img/profileD.png" alt="" />
           <div class="comment-section dis-inline-block">
               ${short[i].text}
