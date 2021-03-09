@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 // const postController = require('./../Controller/postController');
 const authController = require('./../Controller/authController');
@@ -6,15 +7,18 @@ const Post = require('./../models/postModel');
 const router = express.Router();
 
 router.route('/login').get((req, res, next) => {
-  res.render('login.ejs');
+  let token;
+  if (req.cookies.jwt) token = req.cookies.jwt;
+  if (!token) res.render('authorization.ejs');
+  else res.redirect('/newsFeed');
 });
-router.route('/register').get((req, res, next) => {
-  res.render('register.ejs');
-});
+// router.route('/register').get((req, res, next) => {
+//   res.render('register.ejs');
+// });
 
-router.route('/forgotPassword').get((req, res, next) => {
-  res.render('forgotPassword.ejs');
-});
+// router.route('/forgotPassword').get((req, res, next) => {
+//   res.render('forgotPassword.ejs');
+// });
 
 // router.use(authController.protectAccess);
 router
