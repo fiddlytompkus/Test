@@ -1,29 +1,4 @@
 ('use strict');
-
-var jumpLetter = document.querySelectorAll('.jump-letter');
-var i = 0;
-for (i = 0; i < jumpLetter.length; i++) {
-  jumpLetter[i].addEventListener('mouseover', function () {
-    this.style.animationName = 'animateJump';
-  });
-}
-
-const allImgOrVideo = document.querySelectorAll('.img-or-video');
-
-for (i = 0; i < allImgOrVideo.length; i++) {
-  allImgOrVideo[i].addEventListener('click', function openFullscreen() {
-    if (this.requestFullscreen) {
-      this.requestFullscreen();
-    } else if (this.webkitRequestFullscreen) {
-      /* Safari */
-      this.webkitRequestFullscreen();
-    } else if (this.msRequestFullscreen) {
-      /* IE11 */
-      this.msRequestFullscreen();
-    }
-  });
-}
-
 //like here
 var liketoggle = document.querySelectorAll('.like-color-toggle');
 for (var i = 0; i < liketoggle.length; i++) {
@@ -39,7 +14,6 @@ for (var i = 0; i < liketoggle.length; i++) {
       }).then((res) => {
         if (res.data.status == 'OK') {
           if (res.data.liked) {
-            // console.log('I came Here');
             var element = event.target
               .closest('.post-data-with-information')
               .querySelector('.not-liked');
@@ -61,6 +35,7 @@ for (var i = 0; i < liketoggle.length; i++) {
     }
   });
 }
+
 // Onwards post modal window
 var postModalBtn = document.querySelector('.post-input');
 var postModal = document.querySelector('.Post-Modal');
@@ -98,7 +73,7 @@ submitPostBTN.addEventListener('submit', async (e) => {
   }
 });
 
-//Posting comment
+//getting comment on request
 const commentSection = document.querySelectorAll('.commentSection');
 for (var i = 0; i < commentSection.length; i++) {
   commentSection[i].addEventListener('click', async (event) => {
