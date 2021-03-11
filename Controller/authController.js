@@ -51,6 +51,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     DOB: req.body.DOB,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
+    userPhoto: 'profileD.png',
     //role: req.body.role,
   });
   //   console.log(newUser);

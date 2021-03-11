@@ -24,8 +24,7 @@ router.route('/login').get((req, res, next) => {
 router
   .route('/newsFeed')
   .get(authController.protectAccess, async (req, res, next) => {
-    const post = await Post.find();
-    // console.log(post);
+    const post = await Post.find().populate({ path: 'authorId' });
     res.render('newsFeed.ejs', {
       allPosts: post,
     });

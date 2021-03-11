@@ -22,6 +22,7 @@ router.patch(
   authController.protectAccess,
   UserController.updateMe
 );
+
 router.delete(
   '/deleteMe',
   authController.protectAccess,
@@ -35,8 +36,13 @@ router
 
 router
   .route('/:id')
-  .get(UserController.GetUser)
-  .patch(UserController.UpdateUser)
+  .get(authController.protectAccess, UserController.GetUser)
+  .patch(
+    authController.protectAccess,
+    UserController.uploadUserImg,
+    UserController.resizeUserPhoto,
+    UserController.UpdateUser
+  )
   .delete(
     authController.protectAccess,
     authController.restrictTo('admin'),

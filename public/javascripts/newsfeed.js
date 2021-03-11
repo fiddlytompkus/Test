@@ -112,9 +112,19 @@ for (var i = 0; i < commentSection.length; i++) {
         var full = '';
         var short = response.data.data.comments;
         for (var i = 0; i < short.length; i++) {
+          var respForAuthor;
+          const urlForAuthor = '/v1/users/' + short[i].authorId;
+          try {
+            respForAuthor = await axios({
+              method: 'GET',
+              url: urlForAuthor,
+            });
+          } catch (err) {
+            console.log(err.message);
+          }
           if (short[i].authorUsername == resp.data.user.username) {
             var commentData = `<div class="who-commented " style = "background-color : grey">
-          <img class="avatar avatar-margin dis-inline-block" src="/img/profileD.png" alt="" />
+          <img class="avatar avatar-margin dis-inline-block" src="/users/${respForAuthor.data.data.IdUser.userPhoto}" alt="" />
           <div class="comment-section dis-inline-block">
               ${short[i].text}
           </div>
@@ -139,7 +149,7 @@ for (var i = 0; i < commentSection.length; i++) {
             full += commentData;
           } else {
             var commentData = `<div class="who-commented" style = "background-color : grey">
-          <img class="avatar avatar-margin dis-inline-block" src="/img/profileD.png" alt="" />
+          <img class="avatar avatar-margin dis-inline-block" src="/users/${respForAuthor.data.data.IdUser.userPhoto}" alt="" />
           <div class="comment-section dis-inline-block">
               ${short[i].text}
           </div>

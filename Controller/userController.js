@@ -2,6 +2,9 @@ const User = require('../models/userModel');
 const validator = require('validator');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const multer = require('multer');
+const sharp = require('sharp');
+
 // const { post } = require('../routes/userRoutes');
 
 const filterObj = (obj, ...allowedFields) => {
@@ -93,7 +96,40 @@ exports.GetUser = catchAsync(async (req, res, next) => {
   });
 });
 
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('Not an Image! Upload Appropiate Image!!', 400), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+exports.uploadUserImg = upload.single('userPhoto');
+
+exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
+  if (!req.file) return next();
+  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+
+  await sharp(req.file.buffer)
+    .resize(500, 500)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/users/${req.file.filename}`);
+
+  next();
+});
+
 exports.UpdateUser = catchAsync(async (req, res, next) => {
+  if (req.file) {
+    req.body.userPhoto = req.file.filename;
+  }
   const IdUser = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,

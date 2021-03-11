@@ -15,11 +15,11 @@
       </form>
     </div>
     <div class="friend-list">
-      <!-- //loop through friend-list -->
+      <!-- //loop through friend-list TODO have to change who is following-->
       <div class="friend-list-item testbg">
         <img
           class="avatar avatar-margin dis-inline-block"
-          src=" /img/profileD.png"
+          src="<%= `users/${user.userPhoto}` %>"
           alt=""
         />
         <span class="dis-inline-block">username</span>
@@ -36,7 +36,7 @@
       <img class="bg-profile-pic" src="/img/statusD.jfif" alt="" />
       <img
         class="avatar avatar-center Profile-Card-Pic-Up"
-        src="/img/profileD.png"
+        src="<%= `users/${user.userPhoto}` %>"
         alt=""
       />
       <div class="show-username noselect" style="text-decoration: underline">
@@ -85,7 +85,7 @@
       <div class="friend-list-item">
         <img
           class="avatar avatar-margin dis-inline-block"
-          src=" /img/profileD.png"
+          src="<%= `users/${list.userPhoto}` %>"
           alt=""
         />
         <span class="dis-inline-block show-username">
@@ -112,7 +112,7 @@
     <div class="post-form-l1">
       <img
         class="avatar avatar-margin"
-        src="/img/profileD.png"
+        src="<%= `users/${user.userPhoto}` %>"
         alt="profileD.png not found!"
       />
       <!-- <form action=""> -->
