@@ -60,12 +60,14 @@ postModalClose.addEventListener('click', () => {
 const submitPostBTN = document.getElementById('postForm');
 submitPostBTN.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const postContent = document.getElementById('postContent').value;
+  const formData = new FormData();
+  formData.append('postContent', document.getElementById('postContent').value);
+  formData.append('image', document.getElementById('actual-btn-one').files[0]);
   try {
     const response = await axios({
       method: 'POST',
       url: '/v1/posts/',
-      data: { postContent },
+      data: formData,
     });
     if (response.data.status == 'OK') {
       window.setTimeout(() => {

@@ -23,6 +23,7 @@ const postSchema = new mongoose.Schema({
     },
   ],
   likes: [String],
+  image: String,
 });
 
 module.exports = mongoose.model('Post', postSchema);

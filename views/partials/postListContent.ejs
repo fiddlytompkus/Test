@@ -1,64 +1,56 @@
 <% for(var list of allPosts) { %>
 
-<div data-id="<%= list.id %>" class="post-data-with-information">
-  <img
-    class="avatar avatar-margin noselect"
-    src="/img/profileD.png"
-    alt="profileD.png not found!"
-  />
-  <span class="show-username noselect"> <%= list.authorUsername %> </span>
-  <div class="time-position noselect">
-    <% if(Math.floor((Date.now() -
-    parseInt(list.createdDate))*1.0/(1000*3600*24)) == 0) { %> <%=
-    Math.floor((Date.now() - parseInt(list.createdDate))*1.0/(1000*3600)) %>
-    hours ago <% } else {%> <%= Math.floor((Date.now() -
-    parseInt(list.createdDate))*1.0/(1000*3600*24)) %> days ago <% } %>
-  </div>
-  <div class="post-summary"><%= list.postContent %></div>
-  <img class="img-or-video" src="/img/statusD.jfif" alt="" />
-  <div class="reacted-people likes-count">
-    <%= list.likes.length %>&nbsp;like(s)
-  </div>
-  <div class="comments-count">
-    <a data-wow="2" class="Comments commentSection on-hover-cursor">
-      <%= list.comments.length %> Comments
-    </a>
-  </div>
-  <hr class="dropdown-divider" />
-  <div class="row" style="margin-left: 1vw">
-    <div
-      class="col-4 on-hover-cursor add-on noselect like-color-toggle"
-      style="margin-left: -10px"
-    >
-      <% if (list.likes.indexOf(user.username)> -1) {%>
-      <div class="liked-already">
-        <i class="fas fa-thumbs-up"></i>&nbsp;Like
+  <div data-id="<%= list.id %>" class="post-data-with-information">
+    <img class="avatar avatar-margin noselect" src="/img/profileD.png" alt="profileD.png not found!" />
+    <span class="show-username noselect">
+      <%= list.authorUsername %>
+    </span>
+    <div class="time-position noselect">
+      <% if(Math.floor((Date.now() - parseInt(list.createdDate))*1.0/(1000*3600*24))==0) { %>
+        <%= Math.floor((Date.now() - parseInt(list.createdDate))*1.0/(1000*3600)) %>
+          hours ago <% } else {%>
+            <%= Math.floor((Date.now() - parseInt(list.createdDate))*1.0/(1000*3600*24)) %> days ago <% } %>
+    </div>
+    <div class="post-summary">
+      <%= list.postContent %>
+    </div>
+    <img class="img-or-video" src="<%= `posts/${list.image}` %>" alt="bunty noob hi rahega" />
+    <div class=" reacted-people likes-count">
+      <%= list.likes.length %>&nbsp;like(s)
+    </div>
+    <div class="comments-count">
+      <a data-wow="2" class="Comments commentSection on-hover-cursor">
+        <%= list.comments.length %> Comments
+      </a>
+    </div>
+    <hr class="dropdown-divider" />
+    <div class="row" style="margin-left: 1vw">
+      <div class="col-4 on-hover-cursor add-on noselect like-color-toggle" style="margin-left: -10px">
+        <% if (list.likes.indexOf(user.username)> -1) {%>
+          <div class="liked-already">
+            <i class="fas fa-thumbs-up"></i>&nbsp;Like
+          </div>
+          <%} else {%>
+            <div class="not-liked"><i class="fas fa-thumbs-up"></i>&nbsp;Like</div>
+            <%}%>
       </div>
-      <%} else {%>
-      <div class="not-liked"><i class="fas fa-thumbs-up"></i>&nbsp;Like</div>
-      <%}%>
+      <div class="col-4 noselect on-hover-cursor add-on commentSection">
+        <i class="fas fa-comment-dots"></i>&nbsp;Comment
+      </div>
+      <div class="col-4 on-hover-cursor add-on noselect">
+        <i class="fas fa-share"></i>&nbsp;Share
+      </div>
     </div>
-    <div class="col-4 noselect on-hover-cursor add-on commentSection">
-      <i class="fas fa-comment-dots"></i>&nbsp;Comment
+    <hr class="dropdown-divider" />
+    <div class="Comment-Post">
+      <form class="commentPost">
+        <img class="avatar Comment-Post-Avatar" src="/img/profileD.png" alt="" />
+        <textarea class="commentPostData" name="commentPostData" id="commentPostData"></textarea>
+        <button type="submit" class="commentPostSubmit" style="outline: none">
+          <i class="fas fa-arrow-circle-up"></i>
+        </button>
+      </form>
     </div>
-    <div class="col-4 on-hover-cursor add-on noselect">
-      <i class="fas fa-share"></i>&nbsp;Share
-    </div>
+    <div class="Comments-Hide"></div>
   </div>
-  <hr class="dropdown-divider" />
-  <div class="Comment-Post">
-    <form class="commentPost">
-      <img class="avatar Comment-Post-Avatar" src="/img/profileD.png" alt="" />
-      <textarea
-        class="commentPostData"
-        name="commentPostData"
-        id="commentPostData"
-      ></textarea>
-      <button type="submit" class="commentPostSubmit" style="outline: none">
-        <i class="fas fa-arrow-circle-up"></i>
-      </button>
-    </form>
-  </div>
-  <div class="Comments-Hide"></div>
-</div>
-<% } %>
+  <% } %>
