@@ -11,7 +11,12 @@ router.use('/:postId/like', likeRoutes);
 router
   .route('/')
   .get(PostController.getAllPost)
-  .post(authController.protectAccess, PostController.CreatePost);
+  .post(
+    authController.protectAccess,
+    PostController.uploadPostImg,
+    PostController.resizeUserPhoto,
+    PostController.CreatePost
+  );
 
 router.use(authController.protectAccess);
 router
