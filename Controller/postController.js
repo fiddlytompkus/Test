@@ -1,4 +1,6 @@
 const Post = require('./../models/postModel');
+const fs = require('fs');
+const Comment = require('./../models/commentModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const multer = require('multer');
@@ -6,6 +8,7 @@ const sharp = require('sharp');
 const {
   findByIdAndUpdate,
   findByIdAndDelete,
+  findById,
 } = require('./../models/postModel');
 const { isValidObjectId } = require('mongoose');
 
@@ -102,7 +105,16 @@ exports.UpdatePost = catchAsync(async (req, res, next) => {
 
 exports.DeleteOne = catchAsync(async (req, res, next) => {
   const id = req.params.id;
+  const postData = await Post.findById(id);
+  if (postData.image)
+    fs.unlink(`${__dirname}/../public/posts/${postData.image}`, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
   const deletedOne = await Post.findByIdAndDelete(id);
+  const deleteAllRelatedComment = await Comment.deleteMany({ postId: id });
+  // TO be check in future
   if (!deletedOne) {
     return next(new AppError('No document found with that ID', 404));
   }

@@ -20,6 +20,8 @@ router.patch(
 router.patch(
   '/updateMe',
   authController.protectAccess,
+  UserController.uploadPhotoCoverPhoto,
+  UserController.resizePhotoCoverPhoto,
   UserController.updateMe
 );
 
@@ -37,12 +39,7 @@ router
 router
   .route('/:id')
   .get(authController.protectAccess, UserController.GetUser)
-  .patch(
-    authController.protectAccess,
-    UserController.uploadUserImg,
-    UserController.resizeUserPhoto,
-    UserController.UpdateUser
-  )
+
   .delete(
     authController.protectAccess,
     authController.restrictTo('admin'),
@@ -54,3 +51,9 @@ router.route('/:id/addFriend').patch(UserController.addFriend);
 router.route('/:id/removeFriend').patch(UserController.removeFriend);
 
 module.exports = router;
+// .patch(
+//   authController.protectAccess,
+//   UserController.uploadPhotoCoverPhoto,
+//   UserController.uploadPhotoCoverPhoto,
+//   UserController.UpdateUser
+// );

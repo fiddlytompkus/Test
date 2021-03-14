@@ -52,7 +52,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
     userPhoto: 'profileD.png',
-    //role: req.body.role,
+    coverPhoto: 'coverPhotoD.jpg',
   });
   //   console.log(newUser);
   // Signup Token used for Login Purpose

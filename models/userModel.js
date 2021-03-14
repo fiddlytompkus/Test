@@ -70,6 +70,7 @@ const userSchema = new mongoose.Schema({
     },
   ],
   userPhoto: String,
+  coverPhoto: String,
 });
 
 userSchema.pre('save', async function (next) {

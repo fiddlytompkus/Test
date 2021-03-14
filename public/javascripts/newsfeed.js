@@ -123,7 +123,7 @@ for (var i = 0; i < commentSection.length; i++) {
             console.log(err.message);
           }
           if (short[i].authorUsername == resp.data.user.username) {
-            var commentData = `<div class="who-commented " style = "background-color : grey">
+            var commentData = `<div class="who-commented " style = "background-color : rgb(36, 37, 39)">
           <img class="avatar avatar-margin dis-inline-block" src="/users/${respForAuthor.data.data.IdUser.userPhoto}" alt="" />
           <div class="comment-section dis-inline-block">
               ${short[i].text}
@@ -148,7 +148,7 @@ for (var i = 0; i < commentSection.length; i++) {
       </div>`;
             full += commentData;
           } else {
-            var commentData = `<div class="who-commented" style = "background-color : grey">
+            var commentData = `<div class="who-commented" style = "background-color : rgb(36, 37, 39)">
           <img class="avatar avatar-margin dis-inline-block" src="/users/${respForAuthor.data.data.IdUser.userPhoto}" alt="" />
           <div class="comment-section dis-inline-block">
               ${short[i].text}
@@ -272,4 +272,28 @@ function Deleting_Comment(elementPost) {
       }
     });
   }
+}
+
+// delete post
+const deletePost = document.querySelectorAll('.delete-post');
+for (var i = 0; i < deletePost.length; i++) {
+  deletePost[i].addEventListener('click', async (event) => {
+    var id = event.target
+      .closest('.post-data-with-information')
+      .getAttribute('data-id');
+    try {
+      const urrl = '/v1/posts/' + id;
+      const response = await axios({
+        method: 'DELETE',
+        url: urrl,
+      });
+      if (response.data.status == 'OK') {
+        window.setTimeout(() => {
+          location.assign('/newsfeed');
+        }, 50);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  });
 }

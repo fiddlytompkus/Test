@@ -32,7 +32,9 @@ router
 router
   .route('/profile')
   .get(authController.protectAccess, async (req, res, next) => {
-    const post = await Post.find();
+    const post = await Post.find({ authorId: req.user.id }).populate({
+      path: 'authorId',
+    });
     res.render('profile.ejs', { allPosts: post });
   });
 module.exports = router;

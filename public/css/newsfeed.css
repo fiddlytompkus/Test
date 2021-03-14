@@ -124,7 +124,7 @@
   border-radius: 50%;
 }
 .avatar-margin {
-  margin: 10px 10px -8px 10px;
+  margin: 8px 10px -8px 10px;
 }
 
 .newsFeed-body {
@@ -206,7 +206,7 @@
 }
 .time-position {
   position: relative;
-  margin-top: -14px;
+  margin-top: -18px;
   margin-left: 70px;
 }
 .post-data-with-information {
@@ -217,6 +217,7 @@
   /* width: 576px; */
   background-color: rgb(36, 37, 39);
   /* height: 418px; */
+  padding-top:5px;
   height: auto;
   color: #aaaaaa;
 }
@@ -270,9 +271,8 @@
 }
 .who-commented {
   margin-top: 0px;
-  max-width: 624px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+  /* max-width: 624px; */
+  width: 100%;
 }
 .comment-section {
   margin-top: 15px;
@@ -306,6 +306,7 @@
 }
 .Comment-Post {
   margin-top: 10px;
+  margin-bottom: -6px;
   border-radius: 8px;
   height: auto;
   max-width: 640px;
@@ -323,16 +324,15 @@
 }
 .commentPostSubmit {
   float: right;
-  margin-right: 5px;
-  /* margin-left: 0px; */
-  margin-top: 4px;
-  border-radius: 45%;
-  border-color: rgb(36, 37, 39);
-  /* margin-bottom: 10px; */
+  margin-right: 8px;
+  border:0;
+  border-radius: 50%;
+  background-color: rgb(36, 37, 39);
 }
 
 .commentPostData {
-  width: 480px;
+  /* width: 480px; */
+  width: 76%;
   margin-left: 10px;
   border-radius: 15px;
   height: 30px;
@@ -356,8 +356,7 @@
     width: 360px;
   }
   .commentPostData {
-    min-width: 300px;
-    max-width: 350px;
+   width: 72%;
   }
 }
 @media screen and (min-width: 1000px) {
@@ -368,7 +367,7 @@
     width: 510px;
   }
   .commentPostData {
-    width: 500px;
+    width:78%;
   }
 }
 .add-on {
@@ -513,9 +512,10 @@
   font-size: 19px;
   font-family: cursive;
   font-weight: 100;
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
   color: white;
+  text-transform: capitalize;
 }
 .username-pos-modal {
   margin-right: 370px;
@@ -587,3 +587,10 @@
 .button-format-comment:hover {
   cursor: pointer;
 }
+
+.post-dropdown-options {
+  color: white;
+  margin-right: 15px;
+}
+
+

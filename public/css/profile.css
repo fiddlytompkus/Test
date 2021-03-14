@@ -1,16 +1,17 @@
 .profile-card-outside {
-  margin-top: 80px;
-  height: 390px;
+  margin-top: 84px;
+  height: 400px;
   background-color: rgb(36, 37, 39);
   width: 100%;
 }
 .profile-card-inside {
   margin-top: 80px;
-  height: 260px;
+  height: 270px;
   background-color: rgb(24, 25, 26);
   max-width: 700px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  padding: 0;
   z-index: -1;
 }
 .profile-avatar {
@@ -26,6 +27,7 @@
   color: white;
   font-family: cursive;
   margin-top: -10px;
+  text-transform: capitalize;
 }
 .profile-separtor {
   max-width: 700px;
@@ -34,7 +36,6 @@
 .profile-navbar-inline {
   margin-left: 100px;
   max-width: 700px;
-  background-color: blue;
   float: left;
   height: 100px;
 }
@@ -49,15 +50,18 @@
   font-size: 16px;
   font-family: cursive;
   font-weight: 200;
+  cursor: pointer;
 }
 .profile-navbar-items:hover {
   background-color: rgb(156, 157, 158);
 }
+
 .profile-content {
   max-width: 700px;
-  align-content: center;
-  height: 170px;
+  margin: 0 auto;
+  height: auto;
 }
+
 .profile-left-block {
   height: 169px;
   float: left;
@@ -73,29 +77,22 @@
   }
 }
 .profile-post-content {
-  /* max-width: 700px; */
-  width: 445px;
+  width: 100%;
   border-radius: 8px;
-  margin-top: 25px;
-  float: right;
+  margin-top: 35px;
 }
-@media screen and (max-width: 800px) {
-  .profile-post-content {
-    float: none;
-  }
-}
+
 .profile-post-form-add-margin {
   margin-top: 0px;
 }
 .profile-content-top {
   height: auto;
   max-width: 700px;
-  /* background-color: brown; */
   align-self: center;
-  height: 300px;
 }
 .profile-post-list {
-  margin-top: -70px;
+  width: 640px;
+  margin: 125px auto;
 }
 .profile-intro-box {
   color: white;
@@ -123,4 +120,82 @@
 .intro-box-item-edit:hover {
   background-color: rgb(81, 83, 82);
   border-radius: 5px;
+}
+.about-user {
+  max-width: 700px;
+  margin: 35px auto;
+  /* height: auto; */
+  background-color: blue;
+  height: 200px;
+  display: none;
+}
+
+.profile-friend-section {
+  max-width: 700px;
+  margin: 35px auto;
+  /* height: auto; */
+  background-color: blue;
+  height: 200px;
+  display: none;
+}
+.profile-photo-section {
+  max-width: 700px;
+  margin: 35px auto;
+  /* height: auto; */
+  background-color: rgb(112, 12, 34);
+  height: 200px;
+  display: none;
+}
+.add-cover-photo{
+  font-size: 16px;
+  z-index: 2;
+  margin-top: -500px;
+  padding: 0;
+  cursor: pointer;
+  color: white;
+  margin-left: 78%;
+ 
+  background-color: rgb(36, 37, 39);
+  padding:7px 7px 7px 7px;
+  border-radius: 8px;
+}
+.add-cover-photo:hover{
+  background-color: rgb(60, 61, 63);
+  padding:7px 7px 7px 7px;
+  border-radius: 8px;
+}
+.upload-cover-photo-confirm{
+  display: none;
+  z-index: 2;
+  margin-top: -263px;
+  height: 40px;
+  background-color: rgb(21,19,23);
+  opacity: 0.5;
+  left:0;
+  right: 0;
+  position: absolute; 
+
+}
+.confirm-top-left-data{
+  float:left;
+  font-size:18px;
+  margin-top:5px;
+  font-style: italic;
+  margin-left: 22px;
+  color: white;
+}
+.confirm-top-right-button{
+  margin-top:5px;
+  margin-left: 5px;
+  color: white;
+  background-color: rgb(36, 37, 39);
+  text-decoration: none;
+  border:0;
+  outline: none;
+  height:32px;
+  border-radius: 8px;
+}
+.confirm-top-right-button:hover{
+  background-color: rgb(81, 83, 82);
+  outline: thin;
 }

@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const validator = require('validator');
+const fs = require('fs');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const multer = require('multer');
@@ -7,6 +8,65 @@ const sharp = require('sharp');
 
 // const { post } = require('../routes/userRoutes');
 
+const multerStorage = multer.memoryStorage();
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('Not an Image! Upload Appropiate Image!!', 400), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+exports.uploadPhotoCoverPhoto = upload.fields([
+  { name: 'userPhoto', maxCount: 1 },
+  { name: 'coverPhoto', maxCount: 1 },
+]);
+
+exports.resizePhotoCoverPhoto = catchAsync(async (req, res, next) => {
+  if (!req.files.userPhoto && !req.files.coverPhoto) return next();
+  const loginUser = await User.findById(req.user.id);
+  if (req.files.userPhoto) {
+    if (loginUser.userPhoto != 'profileD.png')
+      fs.unlink(
+        `${__dirname}/../public/users/${loginUser.userPhoto}`,
+        (err) => {
+          if (err) {
+            throw err;
+          }
+        }
+      );
+    req.body.userPhoto = `user-${req.user.id}-${Date.now()}.jpeg`;
+    await sharp(req.files.userPhoto[0].buffer)
+      .resize(500, 500)
+      .toFormat('jpeg')
+      .jpeg({ quality: 90 })
+      .toFile(`public/users/${req.body.userPhoto}`);
+  }
+  if (req.files.coverPhoto) {
+    if (loginUser.coverPhoto != 'coverPhotoD.jpg') {
+      fs.unlink(
+        `${__dirname}/../public/coverPhoto/${loginUser.coverPhoto}`,
+        (err) => {
+          if (err) {
+            throw err;
+          }
+        }
+      );
+    }
+    req.body.coverPhoto = `coverPhoto-${req.user.id}-${Date.now()}.jpeg`;
+    await sharp(req.files.coverPhoto[0].buffer)
+      .resize(2000, 1333)
+      .toFormat('jpeg')
+      .jpeg({ quality: 90 })
+      .toFile(`public/coverPhoto/${req.body.coverPhoto}`);
+  }
+  next();
+});
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
   Object.keys(obj).forEach((el) => {
@@ -49,7 +109,9 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     'photo',
     'firstname',
     'lastname',
-    'phoneNumber'
+    'phoneNumber',
+    'userPhoto',
+    'coverPhoto'
   );
 
   // 2) Update User Document
@@ -96,56 +158,56 @@ exports.GetUser = catchAsync(async (req, res, next) => {
   });
 });
 
-const multerStorage = multer.memoryStorage();
+// const multerStorage = multer.memoryStorage();
 
-const multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith('image')) {
-    cb(null, true);
-  } else {
-    cb(new AppError('Not an Image! Upload Appropiate Image!!', 400), false);
-  }
-};
+// const multerFilter = (req, file, cb) => {
+//   if (file.mimetype.startsWith('image')) {
+//     cb(null, true);
+//   } else {
+//     cb(new AppError('Not an Image! Upload Appropiate Image!!', 400), false);
+//   }
+// };
 
-const upload = multer({
-  storage: multerStorage,
-  fileFilter: multerFilter,
-});
+// const upload = multer({
+//   storage: multerStorage,
+//   fileFilter: multerFilter,
+// });
 
-exports.uploadUserImg = upload.single('userPhoto');
+// exports.uploadUserImg = upload.single('userPhoto');
 
-exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
-  if (!req.file) return next();
-  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+// exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
+//   if (!req.file) return next();
+//   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
 
-  await sharp(req.file.buffer)
-    .resize(500, 500)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toFile(`public/users/${req.file.filename}`);
+//   await sharp(req.file.buffer)
+//     .resize(500, 500)
+//     .toFormat('jpeg')
+//     .jpeg({ quality: 90 })
+//     .toFile(`public/users/${req.file.filename}`);
 
-  next();
-});
+//   next();
+// });
 
-exports.UpdateUser = catchAsync(async (req, res, next) => {
-  if (req.file) {
-    req.body.userPhoto = req.file.filename;
-  }
-  const IdUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+// exports.UpdateUser = catchAsync(async (req, res, next) => {
+//   if (req.file) {
+//     req.body.userPhoto = req.file.filename;
+//   }
+//   const IdUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+//     new: true,
+//     runValidators: true,
+//   });
 
-  if (!IdUser) {
-    return next(new AppError('No user found with that ID', 404));
-  }
+//   if (!IdUser) {
+//     return next(new AppError('No user found with that ID', 404));
+//   }
 
-  res.status(200).json({
-    status: 'OK',
-    data: {
-      IdUser,
-    },
-  });
-});
+//   res.status(200).json({
+//     status: 'OK',
+//     data: {
+//       IdUser,
+//     },
+//   });
+// });
 
 exports.DeleteUser = catchAsync(async (req, res, next) => {
   const IdUser = await User.findByIdAndDelete(req.params.id);
