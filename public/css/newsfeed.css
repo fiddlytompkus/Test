@@ -23,7 +23,7 @@
   background-color: teal;
 }
 .nav-con {
-  padding: 7px 20px 7px 20px;
+  padding: 1px 20px 0px 20px;
 }
 .sticky {
   position: -webkit-sticky;
@@ -128,7 +128,7 @@
 }
 
 .newsFeed-body {
-  margin-top: 100px;
+  margin-top: -25px;
 }
 .list-of-status {
   margin: 120px auto;
@@ -532,15 +532,16 @@
 }
 .Profile-Card-Pic-Up {
   margin-top: -35px;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   z-index: 1;
+  margin-bottom: -15px;
 }
 .Profile-Card {
   height: 365px;
   border-radius: 13px;
-  background-color: rgb(189, 173, 204);
+  background-color: rgb(93, 94, 95);
 }
 .bg-profile-pic {
   z-index: -1;
@@ -593,4 +594,7 @@
   margin-right: 15px;
 }
 
-
+.icon-font{
+  font-size: 25px;
+  color: rgb(209, 202, 202);
+}

@@ -13,6 +13,7 @@ dotenv.config({ path: `${__dirname}/config.env` });
 const app = require(`${__dirname}/app.js`);
 
 app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 
 const DB = process.env.DATABASE.replace('<password>', process.env.PASSWORD);
 

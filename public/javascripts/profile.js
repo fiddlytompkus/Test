@@ -52,17 +52,27 @@ PHOTOS_BTN.addEventListener('click', () => {
   profileFriendSection.style.display = 'none';
   profilePhotoSection.style.display = 'block';
 });
-///
+
+// Cover Photo Upload
 const uploadCoverPhoto = document.getElementById('upload-cover-photo-form');
+
 document.getElementById('upload-cover-photo').onchange = () => {
-  document.querySelector('.upload-cover-photo-confirm').style.display = 'block';
+  document.querySelectorAll('.upload-cover-photo-confirm')[0].style.display =
+    'block';
 };
-const CancelCoverPhotoUpload = document.getElementById(
-  'cancel-upload-cover-photo'
+
+const CancelCoverPhotoUpload = document.querySelectorAll(
+  '.cancel-upload-cover-photo'
 );
-CancelCoverPhotoUpload.addEventListener('click', () => {
-  document.querySelector('.upload-cover-photo-confirm').style.display = 'none';
-});
+
+for (var i = 0; i < CancelCoverPhotoUpload.length; i++) {
+  CancelCoverPhotoUpload[i].addEventListener('click', () => {
+    document.querySelectorAll('.upload-cover-photo-confirm')[0].style.display =
+      'none';
+    document.querySelectorAll('.upload-cover-photo-confirm')[1].style.display =
+      'none';
+  });
+}
 uploadCoverPhoto.addEventListener('submit', async (event) => {
   event.preventDefault();
   const newFormData = new FormData();
@@ -70,7 +80,35 @@ uploadCoverPhoto.addEventListener('submit', async (event) => {
     'coverPhoto',
     document.getElementById('upload-cover-photo').files[0]
   );
-  console.log(document.getElementById('upload-cover-photo').files[0]);
+  try {
+    const response = await axios({
+      method: 'PATCH',
+      url: '/v1/users/updateMe',
+      data: newFormData,
+    });
+    if (response.data.status == 'success') {
+      window.setTimeout(() => {
+        location.assign('/profile');
+      }, 50);
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+// User Photo
+const uploadUserPhoto = document.getElementById('upload-user-photo-form');
+document.getElementById('upload-user-photo').onchange = () => {
+  document.querySelectorAll('.upload-cover-photo-confirm')[1].style.display =
+    'block';
+};
+uploadUserPhoto.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const newFormData = new FormData();
+  newFormData.append(
+    'userPhoto',
+    document.getElementById('upload-user-photo').files[0]
+  );
   try {
     const response = await axios({
       method: 'PATCH',

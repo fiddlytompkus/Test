@@ -4,7 +4,7 @@ const catchAsync = require('./../utils/catchAsync');
 const User = require('./../models/userModel');
 const jwt = require('jsonwebtoken');
 const AppError = require('./../utils/appError');
-const sendEmail = require('./../utils/email');
+const Email = require('./../utils/email');
 const validator = require('validator');
 const { findById } = require('./../models/userModel');
 
@@ -56,6 +56,10 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
   //   console.log(newUser);
   // Signup Token used for Login Purpose
+  const url = `${req.protocol}://${req.get('host')}/profile`;
+  // console.log(url);
+  await new Email(newUser, url).sendWelcome();
+
   createSendToken(newUser, 201, req, res);
 });
 
@@ -186,7 +190,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\n If you didn't forget your password, please ignore this email!`;
 
   try {
-    await sendEmail({
+    await Email({
       email: user.email,
       subject: 'Your Password Reset Token (valid for 10 min)',
       message,
