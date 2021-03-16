@@ -155,52 +155,53 @@ exports.protectAccess = catchAsync(async (req, res, next) => {
   req.user = currentUser;
   res.locals.user = currentUser;
   var friends = [];
+  var arr = [];
   for (var i = 0; i < currentUser.friendList.length; i++) {
-    const obj = await User.findById(currentUser.friendList[i]);
-    // .populate({
-    //   path: 'userStory',
-    // });
-    // friends.push(obj);
-    // if (obj) {
-    //   var arr = [];
-    //   console.log(obj);
-    //   console.log(obj.userStory.length);
-    //   for (var j = 0; j < obj.userStory.length; j++) {
-    //     if (
-    //       Math.floor((Date.now() - parseInt(obj.userStory[j].createdAt)) * 1) >=
-    //       20000
-    //     ) {
-    //       console.log('I have to delete it');
-    //       var id = obj.userStory[j].id;
-    //       arr.push(id);
-    //       const findStory = await Story.findById(id);
-    //       if (findStory) {
-    //         if (findStory.storyPhoto) {
-    //           fs.unlink(
-    //             `${__dirname}/../public/story/${findStory.storyPhoto}`,
-    //             (err) => {
-    //               if (err) {
-    //                 throw err;
-    //               }
-    //             }
-    //           );
-    //         }
-    //         const story = await Story.findByIdAndDelete(id);
-    //       }
-    //     } else {
-    //       console.log('I got Obj');
-    //       friends.push(obj);
-    //     }
-    //   }
-    // console.log(arr);
-    var arr = ['6050ec9767c5de9a8933c379'];
+    var obj = await User.findById(currentUser.friendList[i]);
+    for (var j = 0; j < obj.userStory.length; j++) {
+      var findStory = await Story.findById(obj.userStory[j]);
+      if (!findStory) {
+        arr.push(obj.userStory[j]);
+      }
+    }
     for (var j = 0; j < arr.length; j++) {
       var index = obj.userStory.indexOf(arr[j]);
       if (index > -1) {
         obj.userStory.splice(index, 1);
         obj.save({ validateBeforeSave: false });
       }
-      // }
+    }
+    obj = await User.findById(currentUser.friendList[i]).populate({
+      path: 'userStory',
+    });
+    console.log(obj);
+    if (obj) {
+      console.log(obj);
+      console.log(obj.userStory.length);
+      for (var j = 0; j < obj.userStory.length; j++) {
+        if (
+          Math.floor(Date.now() - parseInt(obj.userStory[j].createdAt)) >= 60000
+        ) {
+          console.log('I have to delete it');
+          var id = obj.userStory[j].id;
+          const findStory = await Story.findById(id);
+          if (findStory) {
+            if (findStory.storyPhoto) {
+              fs.unlink(
+                `${__dirname}/../public/story/${findStory.storyPhoto}`,
+                (err) => {
+                  if (err) {
+                    throw err;
+                  }
+                }
+              );
+            }
+            const story = await Story.findByIdAndDelete(id);
+          }
+        } else {
+          friends.push(obj);
+        }
+      }
     }
   }
   res.locals.friendlist = friends;
