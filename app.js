@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const userRouter = require(`${__dirname}/routes/userRoutes`);
 const viewRouter = require(`${__dirname}/routes/viewRoutes`);
 const postRouter = require(`${__dirname}/routes/postRoutes`);
+const storyRouter = require(`${__dirname}/routes/storyRoutes`);
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./Controller/errorController');
 const bodyParser = require('body-parser');
@@ -44,6 +45,7 @@ app.use(express.static(`${__dirname}/public`));
 
 //routes
 app.use('/', viewRouter);
+app.use('/v1/story/', storyRouter);
 app.use('/v1/users/', userRouter);
 app.use('/v1/posts/', postRouter);
 

@@ -6,6 +6,9 @@ const jwt = require('jsonwebtoken');
 const AppError = require('./../utils/appError');
 const Email = require('./../utils/email');
 const validator = require('validator');
+const Story = require('./../models/storyModel');
+const axios = require('./../public/javascripts/axios');
+const fs = require('fs');
 const { findById } = require('./../models/userModel');
 
 const SignToken = (id) => {
@@ -153,7 +156,52 @@ exports.protectAccess = catchAsync(async (req, res, next) => {
   res.locals.user = currentUser;
   var friends = [];
   for (var i = 0; i < currentUser.friendList.length; i++) {
-    friends.push(await User.findById(currentUser.friendList[i]));
+    const obj = await User.findById(currentUser.friendList[i]);
+    // .populate({
+    //   path: 'userStory',
+    // });
+    // friends.push(obj);
+    // if (obj) {
+    //   var arr = [];
+    //   console.log(obj);
+    //   console.log(obj.userStory.length);
+    //   for (var j = 0; j < obj.userStory.length; j++) {
+    //     if (
+    //       Math.floor((Date.now() - parseInt(obj.userStory[j].createdAt)) * 1) >=
+    //       20000
+    //     ) {
+    //       console.log('I have to delete it');
+    //       var id = obj.userStory[j].id;
+    //       arr.push(id);
+    //       const findStory = await Story.findById(id);
+    //       if (findStory) {
+    //         if (findStory.storyPhoto) {
+    //           fs.unlink(
+    //             `${__dirname}/../public/story/${findStory.storyPhoto}`,
+    //             (err) => {
+    //               if (err) {
+    //                 throw err;
+    //               }
+    //             }
+    //           );
+    //         }
+    //         const story = await Story.findByIdAndDelete(id);
+    //       }
+    //     } else {
+    //       console.log('I got Obj');
+    //       friends.push(obj);
+    //     }
+    //   }
+    // console.log(arr);
+    var arr = ['6050ec9767c5de9a8933c379'];
+    for (var j = 0; j < arr.length; j++) {
+      var index = obj.userStory.indexOf(arr[j]);
+      if (index > -1) {
+        obj.userStory.splice(index, 1);
+        obj.save({ validateBeforeSave: false });
+      }
+      // }
+    }
   }
   res.locals.friendlist = friends;
   next();

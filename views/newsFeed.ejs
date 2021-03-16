@@ -111,7 +111,24 @@
   <!-- TODO : Have to Correct the Display of the "What's in your mind Button"-->
   <div class="list-of-status">
     <!-- loop here to list out all status -->
-    <img src="/img/statusD.jfif" alt="status not found" class="status-img" />
+    <table>
+      <td>
+        <img
+          src="<%= `users/${user.userPhoto}` %>"
+          alt="status not found"
+          class="status-img"
+        />
+      </td>
+      <% for(var list of friendlist) { %> <% for(var ele of list.userStory) {%>
+      <td>
+        <img
+          src="<%= `story/${ele.storyPhoto}` %>"
+          alt="status not found"
+          class="status-img"
+        />
+      </td>
+      <%}%> <%}%>
+    </table>
   </div>
   <div class="post-form">
     <div class="post-form-l1">

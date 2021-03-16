@@ -71,6 +71,12 @@ const userSchema = new mongoose.Schema({
   ],
   userPhoto: String,
   coverPhoto: String,
+  userStory: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Story',
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {
