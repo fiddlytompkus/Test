@@ -3,7 +3,9 @@ const express = require('express');
 // const postController = require('./../Controller/postController');
 const User = require('./../models/userModel');
 const authController = require('./../Controller/authController');
+const userController = require('./../Controller/userController');
 const Post = require('./../models/postModel');
+const axios = require('axios');
 
 const router = express.Router();
 
@@ -23,14 +25,17 @@ router.route('/login').get((req, res, next) => {
 
 // router.use(authController.protectAccess);
 router
-  .route('/newsFeed')
-  .get(authController.protectAccess, async (req, res, next) => {
-    console.log(res.locals.user);
-    const post = await Post.find().populate({ path: 'authorId' });
-    res.render('newsFeed.ejs', {
-      allPosts: post,
-    });
-  });
+  .route('/')
+  .get(
+    authController.protectAccess,
+    userController.FriendStory,
+    async (req, res, next) => {
+      const post = await Post.find().populate({ path: 'authorId' });
+      res.render('newsFeed.ejs', {
+        allPosts: post,
+      });
+    }
+  );
 router
   .route('/profile')
   .get(authController.protectAccess, async (req, res, next) => {

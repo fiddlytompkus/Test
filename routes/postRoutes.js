@@ -1,6 +1,7 @@
 const express = require('express');
 const PostController = require('./../Controller/postController');
 const authController = require('./../Controller/authController');
+const userController = require('./../Controller/userController');
 const commentRoutes = require('./commentRoutes');
 const likeRoutes = require('./likeRoutes');
 
@@ -10,7 +11,11 @@ router.use('/:postId/like', likeRoutes);
 
 router
   .route('/')
-  .get(PostController.getAllPost)
+  .get(
+    authController.protectAccess,
+    userController.FriendStory,
+    PostController.getAllPost
+  )
   .post(
     authController.protectAccess,
     PostController.uploadPostImg,
