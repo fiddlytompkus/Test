@@ -69,7 +69,7 @@ exports.CreatePost = catchAsync(async (req, res, next) => {
   });
 });
 exports.getAllPost = catchAsync(async (req, res, next) => {
-  const allPost = await Post.find();
+  const allPost = await Post.find().populate({ path: 'authorId' });
   // JSON.stringify(allPost)
   res.status(200).json({
     status: 'Ok',

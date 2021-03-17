@@ -6,7 +6,7 @@ const storySchema = new mongoose.Schema({
   content: String,
   createdAt: {
     type: Number,
-    default: new Date().getTime(),
+    default: Date.now(),
   },
   authorId: {
     type: mongoose.Schema.ObjectId,

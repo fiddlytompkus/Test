@@ -40,6 +40,8 @@ exports.createStory = catchAsync(async (req, res, next) => {
     req.body.storyPhoto = req.file.filename;
   }
   req.body.authorId = req.user.id;
+  var hrTime = process.hrtime();
+  req.body.createdAt = hrTime[0] * 1000000 + hrTime[1] / 1000;
   const story = await Story.create(req.body);
   const IdUser = await User.findById(req.user.id);
   if (!IdUser) {

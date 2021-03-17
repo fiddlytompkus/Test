@@ -1,6 +1,7 @@
 /* custom scroller for friend-list only */
 ::-webkit-scrollbar {
   width: 7px;
+  height: 6px;
 }
 
 /* Track */
@@ -131,13 +132,13 @@
   margin-top: -25px;
 }
 .list-of-status {
-  margin: 120px auto;
+  margin: 115px auto;
   max-width: 640px;
   background-color: rgb(36, 37, 39);
   border-radius: 8px;
   border-color: black;
   border-width: 5px;
-  max-height: 206px;
+  height: 210px;
   overflow-x: auto;
 }
 .status-img {
@@ -597,4 +598,38 @@
 .icon-font{
   font-size: 25px;
   color: rgb(209, 202, 202);
+}
+/* Story input */
+.story-form{
+  z-index: 2;
+  margin-top: -500px;
+  font-size: larger;
+}
+.story-submit-btn{
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  background-color: rgb(52, 191, 238,0.75);
+
+}
+.story-plus-btn{
+  color: white;
+  font-size: 35px;
+  margin-top:6px;
+}
+.Create-a-Story-P{
+  font-size: 20px;
+  margin-bottom: 30px;
+  font-weight: 500;
+  color: #dfdddd;
+}
+.story-username{
+  z-index: 1;
+  color:white;
+  font-size: 18px;
+  font-weight: 400;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  margin-top: -25px;
+  margin-left: 80px;
 }
